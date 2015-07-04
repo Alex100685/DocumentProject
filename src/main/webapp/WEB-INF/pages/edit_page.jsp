@@ -39,7 +39,7 @@
 		
 		<a href="/createNewPublisher">Create new Publisher</a>
 		<div class="form-group"><input type="text" class="form-control" value="${all[1].inventaryNumber}" name="inventaryNumber" class="form-control" style="width: 429px; " readonly></div>
-        <div class="form-group"><input type="text" class="form-control" value="${all[1].name}" name="name" placeholder="Name" style="width: 429px; "></div>
+        <div class="form-group"><input type="text" class="form-control" value="${all[1].name}" name="name" pattern=".{1,}" placeholder="Name" style="width: 429px; "></div>
         
         Receiver :
         <div> 

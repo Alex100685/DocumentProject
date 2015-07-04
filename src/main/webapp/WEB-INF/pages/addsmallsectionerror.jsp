@@ -25,7 +25,7 @@
 
 <div class="form-group"><input type="text" class="form-control" name="number" placeholder="Number of section" style="width: 343px; "></div>
 
-        <div class="form-group"><input type="text" class="form-control" required="required" pattern="[а-яА-ЯёЁa-zA-Z0-9]{1,1000}" title="Must be not empty" name="name" placeholder="Name of section" style="width: 342px; "></div>
+        <div class="form-group"><input type="text" class="form-control" required="required" pattern=".{1,}" title="Must be not empty" name="name" placeholder="Name of section" style="width: 342px; "></div>
         <div class="form-group"><input type="submit" class="btn btn-primary" value="Add"></div>
     </form>
 </div>

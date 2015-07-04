@@ -17,7 +17,7 @@
         
 
 <div class="form-group"><input type="text" class="form-control" value="${id}" pattern = "[0-9]{1,3}$" title="Must contain only numbers from 1 to 999" required = "required" name="id" placeholder="Number of Big Section" style="width: 327px; "></div>
-        <div class="form-group"><input type="text" class="form-control" name="name" required="required" pattern="[а-яА-ЯёЁa-zA-Z0-9]{1,1000}" title="Must be not empty" placeholder="Name of Big Section" style="width: 327px; "></div>
+        <div class="form-group"><input type="text" class="form-control" name="name" required="required" pattern=".{1,}" title="Must be not empty" placeholder="Name of Big Section" style="width: 327px; "></div>
         <div class="form-group"><input type="submit" value="Add"></div>
     </form>
 </div>

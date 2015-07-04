@@ -17,7 +17,7 @@
         <div class="form-group"><h3>New Receiver</h3></div>
         
 
-<div class="form-group"><input type="text" class="form-control" name="nameOfReceiver" required="required" pattern="[а-яА-ЯёЁa-zA-Z0-9]{1,1000}" title="Must be not empty" placeholder="Name of Receiver" style="width: 327px; "></div>
+<div class="form-group"><input type="text" class="form-control" name="nameOfReceiver" required="required" pattern=".{1,}" title="Must be not empty" placeholder="Name of Receiver" style="width: 327px; "></div>
         <div class="form-group"><input type="submit" value="Add"></div>
     </form>
 </div>

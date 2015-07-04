@@ -39,7 +39,7 @@
 		
         
 <div class="form-group"><input type="text" class="form-control" pattern = "[0-9]{0,3}$" title="Must contain only numbers from 1 to 999" value="${all[2]}" name="numberInSection" required = "required" placeholder="Number in section" style="width: 429px; "></div>
-        <div class="form-group"><input type="text" class="form-control" required="required" pattern="[а-яА-ЯёЁa-zA-Z0-9]{1,1000}" title="Must be not empty" name="name" placeholder="Name" style="width: 429px; "></div>
+        <div class="form-group"><input type="text" class="form-control" required="required" pattern=".{1,}" title="Must be not empty" name="name" placeholder="Name" style="width: 429px; "></div>
         
 
         Receiver :

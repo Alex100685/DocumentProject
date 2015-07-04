@@ -16,7 +16,7 @@
         <div class="form-group"><h3>New Publisher</h3></div>
         
 
-<div class="form-group"><input type="text" class="form-control" required="required" pattern="[а-яА-ЯёЁa-zA-Z0-9]{1,1000}" title="Must be not empty" name="nameOfPublisher" placeholder="Name of publisher" style="width: 327px; "></div>
+<div class="form-group"><input type="text" class="form-control" required="required" pattern=".{1,}" title="Must be not empty" name="nameOfPublisher" placeholder="Name of publisher" style="width: 327px; "></div>
         <div class="form-group"><input type="submit" value="Add"></div>
     </form>
 </div>
