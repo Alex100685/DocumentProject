@@ -12,6 +12,7 @@ public class JDBCAccess {
    Connection conn = null;
    PreparedStatement stmt = null;
    try{
+	   
       Class.forName("com.mysql.jdbc.Driver");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
       String sql = "UPDATE users set attempts="+attemptNum+" WHERE login='"+name+"'";
