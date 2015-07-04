@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class JDBCAccess {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost/mazur";
-   static final String USER = "root";
-   static final String PASS = "root";
+   static final String DB_URL = "jdbc:mysql://127.10.247.130:3306/docservice";
+   static final String USER = "adminriLNIdl";
+   static final String PASS = "HJab8-r9MxMa";
    
    public void updateAttempts(int attemptNum, String name) {
    Connection conn = null;
