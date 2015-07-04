@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -27,8 +28,10 @@ public class MyPdfConverter {
 		
 		
 		//final String TMP_DIR = System.getProperty("java.io.tmpdir");
-		BaseFont bf = BaseFont.createFont("C:\\WINDOWS\\Fonts\\ARIAL.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //подключаем файл шрифта, который поддерживает кириллицу
-		Font font = new Font(bf);
+		//BaseFont bf = BaseFont.createFont("C:\\WINDOWS\\Fonts\\ARIAL.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		//Font font = new Font(bf);
+		
+		Font font = FontFactory.getFont("Arial");
 		
 		
 		ByteArrayInputStream is = new ByteArrayInputStream(file);		
@@ -42,7 +45,7 @@ public class MyPdfConverter {
          PdfPTable my_table;
          if(my_worksheet.getPhysicalNumberOfRows() == 0){
         	 my_table = new PdfPTable(1); 
-        	 my_table.addCell(new Phrase("There is no data on the first sheet of Excel file(Нет Данных)", font));
+        	 my_table.addCell(new Phrase("There is no data on the first sheet of Excel file", font));
         	
          }else{
         	 int colQuant = my_worksheet.getRow(0).getLastCellNum();

@@ -12,6 +12,7 @@ import org.apache.poi.xwpf.converter.core.XWPFConverterException;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -20,9 +21,10 @@ public class MyPDFCreator {
 	
 public static byte [] createPdfWarning() throws XWPFConverterException, IOException, DocumentException{
 		
-		BaseFont bf = BaseFont.createFont("C:\\WINDOWS\\Fonts\\ARIAL.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //подключаем файл шрифта, который поддерживает кириллицу
-		Font font = new Font(bf);
+		//BaseFont bf = BaseFont.createFont("C:\\WINDOWS\\Fonts\\ARIAL.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		//Font font = new Font(bf);
 		
+		Font font = FontFactory.getFont("Arial");
 		  
 		com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 		ByteArrayOutputStream file = null;
@@ -38,7 +40,7 @@ public static byte [] createPdfWarning() throws XWPFConverterException, IOExcept
              document.newPage();  
              writer.setPageEmpty(true);  
 
-             String paragraph = "Недопустимое расширение файла. Доступны к просмотру только файлы с расширением '.doc', 'xls', 'pdf'";  
+             String paragraph = "РќРµ РїРѕРґС…РѕРґСЏС‰РёР№ С„РѕСЂРјР°С‚ С„Р°Р№Р»Р°. РџРѕРґС…РѕРґСЏС‰РёРµ: '.doc', 'xls', 'pdf'";  
              
                   
              document.add(new Paragraph(paragraph, font));  
