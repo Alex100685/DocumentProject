@@ -169,7 +169,7 @@ public class MainController {
 		List <Document> docList = actions.DocumentList();
 		for(Document doc: docList){
 			if(doc.getPublisher() == null){
-				return new ModelAndView("errorPage", "note", "Для сортировки по издателю необходимо указать издателя во всех документах.");
+				return new ModelAndView("errorPage", "note", "Р”Р»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РёР·РґР°С‚РµР»СЋ РЅРµРѕР±С…РѕРґРёРјРѕ СѓРєР°Р·Р°С‚СЊ РёР·РґР°С‚РµР»СЏ РІРѕ РІСЃРµС… РґРѕРєСѓРјРµРЅС‚Р°С….");
 			}
 		}
 		Document [] docArray = new Document [docList.size()];
@@ -186,7 +186,7 @@ public class MainController {
 		List <Document> docList = actions.DocumentList();
 		for(Document doc: docList){
 			if(doc.getPublisher() == null){
-				return new ModelAndView("errorPage", "note", "Для сортировки по издателю необходимо указать издателя во всех документах.");
+				return new ModelAndView("errorPage", "note", "Р”Р»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РёР·РґР°С‚РµР»СЋ РЅРµРѕР±С…РѕРґРёРјРѕ СѓРєР°Р·Р°С‚СЊ РёР·РґР°С‚РµР»СЏ РІРѕ РІСЃРµС… РґРѕРєСѓРјРµРЅС‚Р°С….");
 			}
 		}
 		Document [] docArray = new Document [docList.size()];
@@ -287,7 +287,7 @@ public class MainController {
 		List <Document> docList = actions.DocumentList();
 		for(Document doc: docList){
 			if(doc.getReceiver() == null){
-				return new ModelAndView("errorPage", "note", "Для сортировки по получателю необходимо указать получателя во всех документах.");
+				return new ModelAndView("errorPage", "note", "Р”Р»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РїРѕР»СѓС‡Р°С‚РµР»СЋ РЅРµРѕР±С…РѕРґРёРјРѕ СѓРєР°Р·Р°С‚СЊ РїРѕР»СѓС‡Р°С‚РµР»СЏ РІРѕ РІСЃРµС… РґРѕРєСѓРјРµРЅС‚Р°С….");
 			}
 		}
 		Document [] docArray = new Document [docList.size()];
@@ -304,7 +304,7 @@ public class MainController {
 		List <Document> docList = actions.DocumentList();
 		for(Document doc: docList){
 			if(doc.getReceiver() == null){
-				return new ModelAndView("errorPage", "note", "Для сортировки по получателю необходимо указать получателя во всех документах.");
+				return new ModelAndView("errorPage", "note", "Р”Р»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РїРѕР»СѓС‡Р°С‚РµР»СЋ РЅРµРѕР±С…РѕРґРёРјРѕ СѓРєР°Р·Р°С‚СЊ РїРѕР»СѓС‡Р°С‚РµР»СЏ РІРѕ РІСЃРµС… РґРѕРєСѓРјРµРЅС‚Р°С….");
 			}
 		}
 		Document [] docArray = new Document [docList.size()];
@@ -527,7 +527,7 @@ public class MainController {
 	{	
 		Document d = actions.getDocByInvNym(inventaryNumber);
 		d.setFileName(file.getOriginalFilename());
-		String cyrillicChars = "йцукенгшщзхъфывапролджэячсмитьбюё";
+		String cyrillicChars = "Р№С†СѓРєРµРЅРіС€С‰Р·С…СЉС„С‹РІР°РїСЂРѕР»РґР¶СЌСЏС‡СЃРјРёС‚СЊР±СЋС‘";
 		for(int i=0; i<cyrillicChars.length(); i++){
 			if(file.getOriginalFilename().contains(cyrillicChars.substring(i, i+1))){
 				String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf('.'), file.getOriginalFilename().length());
@@ -605,7 +605,7 @@ public class MainController {
 			doc.setQuantity(quantity);
 			doc.setFileBody(file.getBytes());
 			doc.setFileName(file.getOriginalFilename());
-			String cyrillicChars = "йцукенгшщзхъфывапролджэячсмитьбюё";
+			String cyrillicChars = "Р№С†СѓРєРµРЅРіС€С‰Р·С…СЉС„С‹РІР°РїСЂРѕР»РґР¶СЌСЏС‡СЃРјРёС‚СЊР±СЋС‘";
 			for(int i=0; i<cyrillicChars.length(); i++){
 				if(file.getOriginalFilename().contains(cyrillicChars.substring(i, i+1))){
 					String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf('.'), file.getOriginalFilename().length());
@@ -654,7 +654,7 @@ public class MainController {
 		List <Publisher> pList = actions.PublisherList();
 		for(int i=0; i<pList.size(); i++){
 			if(pList.get(i).getName().equals(nameOfPublisher)){
-				return new ModelAndView("addPublisherFromMain", "note", "Издатель с таким именем уже существует");
+				return new ModelAndView("addPublisherFromMain", "note", "РР·РґР°С‚РµР»СЊ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚");
 			}
 		}
 		Publisher p = new Publisher();
@@ -671,7 +671,7 @@ public class MainController {
 		List <Receiver> rList = actions.ReceiverList();
 		for(int i=0; i<rList.size(); i++){
 			if(rList.get(i).getName().equals(nameOfReceiver)){
-				return new ModelAndView("addReceiverFromMain", "note", "Получатель с таким именем уже существует");
+				return new ModelAndView("addReceiverFromMain", "note", "РџРѕР»СѓС‡Р°С‚РµР»СЊ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚");
 			}
 		}
 		Receiver r = new Receiver();
@@ -734,7 +734,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		doc.setFileName(file.getOriginalFilename());
-		String cyrillicChars = "йцукенгшщзхъфывапролджэячсмитьбюё";
+		String cyrillicChars = "Р№С†СѓРєРµРЅРіС€С‰Р·С…СЉС„С‹РІР°РїСЂРѕР»РґР¶СЌСЏС‡СЃРјРёС‚СЊР±СЋС‘";
 		for(int i=0; i<cyrillicChars.length(); i++){
 			if(file.getOriginalFilename().contains(cyrillicChars.substring(i, i+1))){
 				String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf('.'), file.getOriginalFilename().length());
@@ -984,7 +984,7 @@ public class MainController {
 		List <Object> all = new ArrayList<>();
 		if(!dList.isEmpty()){
 			List <Publisher> pList = actions.PublisherList();
-			note = "Существуют документы, которые привязаны к данному издателю! Удаление невозможно!";
+			note = "РЎСѓС‰РµСЃС‚РІСѓСЋС‚ РґРѕРєСѓРјРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ РїСЂРёРІСЏР·Р°РЅС‹ Рє РґР°РЅРЅРѕРјСѓ РёР·РґР°С‚РµР»СЋ! РЈРґР°Р»РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ!";
 			all.add(pList);
 			all.add(note);
 					return new ModelAndView ("deletePublisherFromMain", "all", all);
@@ -1010,7 +1010,7 @@ public class MainController {
 		List <Object> all = new ArrayList<>();
 		if(!dList.isEmpty()){
 			List <Receiver> rList = actions.ReceiverList();
-			note = "Существуют документы, которые привязаны к данному получателю! Удаление невозможно!";
+			note = "РЎСѓС‰РµСЃС‚РІСѓСЋС‚ РґРѕРєСѓРјРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ РїСЂРёРІСЏР·Р°РЅС‹ Рє РґР°РЅРЅРѕРјСѓ РїРѕР»СѓС‡Р°С‚РµР»СЋ! РЈРґР°Р»РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ!";
 			all.add(rList);
 			all.add(note);
 					return new ModelAndView ("deleteReceiverFromMain", "all", all);
@@ -1159,10 +1159,10 @@ public class MainController {
                                 		 List <BigSection> list = actions.BigSectionList();
                                 			for(BigSection b : list){
                                 				if(b.getId().equals(invNum)){
-                                					String note = "Обнаружены одинаковые номера больших секций"+invNum+". Это не допустимо. Пожалуйста исправьте в файле";
+                                					String note = "РћР±РЅР°СЂСѓР¶РµРЅС‹ РѕРґРёРЅР°РєРѕРІС‹Рµ РЅРѕРјРµСЂР° Р±РѕР»СЊС€РёС… СЃРµРєС†РёР№"+invNum+". Р­С‚Рѕ РЅРµ РґРѕРїСѓСЃС‚РёРјРѕ. РџРѕР¶Р°Р»СѓР№СЃС‚Р° РёСЃРїСЂР°РІСЊС‚Рµ РІ С„Р°Р№Р»Рµ";
                                 					return new ModelAndView ("importFromXls", "note", note);
                                 				}if(b.getName().equals(bsName)){
-                                					String note = "Обнаружены одинаковые названия больших секций"+bsName+". Это не допустимо. Пожалуйста исправьте в файле";
+                                					String note = "РћР±РЅР°СЂСѓР¶РµРЅС‹ РѕРґРёРЅР°РєРѕРІС‹Рµ РЅР°Р·РІР°РЅРёСЏ Р±РѕР»СЊС€РёС… СЃРµРєС†РёР№"+bsName+". Р­С‚Рѕ РЅРµ РґРѕРїСѓСЃС‚РёРјРѕ. РџРѕР¶Р°Р»СѓР№СЃС‚Р° РёСЃРїСЂР°РІСЊС‚Рµ РІ С„Р°Р№Р»Рµ";
                                 					return new ModelAndView ("importFromXls", "note", note);
                                     				}
                                 			}
@@ -1189,10 +1189,10 @@ public class MainController {
                                 		 List <Section> sList = bs.getSections();
                                 		 for(Section sec : sList){
                                 			 if(sec.getId().equals(invNum)){
-                             					String note = "Обнаружены одинаковые номера подсекций "+invNum+". Это не допустимо. Пожалуйста исправьте в файле";
+                                				 String note = "РћР±РЅР°СЂСѓР¶РµРЅС‹ РѕРґРёРЅР°РєРѕРІС‹Рµ РЅРѕРјРµСЂР° РїРѕРґСЃРµРєС†РёР№ "+invNum+". Р­С‚Рѕ РЅРµ РґРѕРїСѓСЃС‚РёРјРѕ. РџРѕР¶Р°Р»СѓР№СЃС‚Р° РёСЃРїСЂР°РІСЊС‚Рµ РІ С„Р°Р№Р»Рµ";
                              					return new ModelAndView ("importFromXls", "note", note);
                              				}if(sec.getName().equals(sName)){
-                             					String note = "Обнаружены одинаковые названия  подсекций "+sName+". Это не допустимо. Пожалуйста исправьте в файле";
+                             					String note = "РћР±РЅР°СЂСѓР¶РµРЅС‹ РѕРґРёРЅР°РєРѕРІС‹Рµ РЅР°Р·РІР°РЅРёСЏ  РїРѕРґСЃРµРєС†РёР№ "+sName+". Р­С‚Рѕ РЅРµ РґРѕРїСѓСЃС‚РёРјРѕ. РџРѕР¶Р°Р»СѓР№СЃС‚Р° РёСЃРїСЂР°РІСЊС‚Рµ РІ С„Р°Р№Р»Рµ";
                              					return new ModelAndView ("importFromXls", "note", note);
                                  				}
                                 			}
@@ -1208,7 +1208,7 @@ public class MainController {
                                 		 List <Document> dList = s.getDocuments();
                                 		 for(Document docs: dList){
                                 			 if(docs.getInventaryNumber().equals(value)){
-                                				 String note = "Обнаружены одинаковые инв. номера документов "+value+". Это не допустимо. Пожалуйста исправьте в файле";
+                                				 String note = "РћР±РЅР°СЂСѓР¶РµРЅС‹ РѕРґРёРЅР°РєРѕРІС‹Рµ РёРЅРІ. РЅРѕРјРµСЂР° РґРѕРєСѓРјРµРЅС‚РѕРІ "+value+". Р­С‚Рѕ РЅРµ РґРѕРїСѓСЃС‚РёРјРѕ. РџРѕР¶Р°Р»СѓР№СЃС‚Р° РёСЃРїСЂР°РІСЊС‚Рµ РІ С„Р°Р№Р»Рµ";
                               					return new ModelAndView ("importFromXls", "note", note);
                                 			 }
                                 		 } 
