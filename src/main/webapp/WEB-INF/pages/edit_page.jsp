@@ -47,7 +47,7 @@
 <c:forEach items="${all[2]}" var="receiver">
 <option>${receiver.name}</option>
 <c:if test="${receiver.name == all[1].receiver.name}">
-<option selected="selected" value=${receiver.name}>${receiver.name}</option>
+<option selected="selected" value="${all[1].receiver.name}">${receiver.name}</option>
 </c:if>
 </c:forEach>
 </select> 
@@ -103,7 +103,7 @@
 <c:forEach items="${all[2]}" var="receiver">
 <option>${receiver.name}</option>
 <c:if test="${receiver.name == all[1].receiver.name}">
-<option selected="selected" value=${receiver.name}>${receiver.name}</option>
+<option selected="selected" value="${all[1]receiver.name}">${receiver.name}</option>
 </c:if>
 </c:forEach>
 </select> 
