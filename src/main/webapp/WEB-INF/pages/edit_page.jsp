@@ -94,8 +94,8 @@
 </div> 
 		
 		<a href="/createNewPublisher">Create new Publisher</a>
-		<div class="form-group"><input type="text" class="form-control" value="${all[1].inventaryNumber}" name="inventaryNumber" placeholder="Name" style="width: 429px; " readonly></div>
-        <div class="form-group"><input type="text" class="form-control" pattern="[а-яА-ЯёЁa-zA-Z0-9]{1,1000}" title="Must be not empty" value="${all[1].name}" name="name" placeholder="Name" style="width: 429px; "></div>
+		<div class="form-group"><input type="text" class="form-control" value="${all[1].inventaryNumber}" name="inventaryNumber" placeholder="Number" style="width: 429px; " readonly></div>
+        <div class="form-group"><input type="text" class="form-control" pattern=".{1,}" title="Must be not empty" value="${all[1].name}" name="name" placeholder="Name" style="width: 429px; "></div>
         
         Receiver :
         <div> 
