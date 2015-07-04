@@ -465,9 +465,14 @@ public class ActionsImpl implements Actions {
 
 	@Override
 	public Receiver getReceiverByName(String receiverName) {
+		try{
 		Query query = entityManager.createQuery("SELECT r FROM Receiver r WHERE r.name ='"+receiverName+"'", Receiver.class);
 		Receiver r = (Receiver) query.getSingleResult();
 		return r;
+		} catch(NoResultException e) {
+	        return null;
+	    }
+		
 	}
 
 	@Override

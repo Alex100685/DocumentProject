@@ -1070,6 +1070,9 @@ public class MainController {
 		String sid = request.getParameter("id");
 		int id = Integer.parseInt(sid);
 		User user = actions.getUserByID(id);
+		if(user.getGroup() !=null){
+			user.getGroup().getUsers().remove(user);
+		}
 		actions.deleteUser(user);
 		List <User> allUsers = actions.getAllUsers();
 		for(int i=0; i<allUsers.size(); i++){
