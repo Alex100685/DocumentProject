@@ -28,9 +28,12 @@ public class MyPdfConverter {
 		
 		
 		//final String TMP_DIR = System.getProperty("java.io.tmpdir");
-		BaseFont bf = BaseFont.createFont("/fonts/Sansation_Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //���������� ���� ������, ������� ������������ ���������
-		
-		Font font = new Font(bf);
+		BaseFont helvetica =
+				  BaseFont.createFont(
+				    BaseFont.HELVETICA,
+				    BaseFont.CP1252,
+				    BaseFont.NOT_EMBEDDED);
+			Font font = new Font(helvetica);
 		
 		
 		
