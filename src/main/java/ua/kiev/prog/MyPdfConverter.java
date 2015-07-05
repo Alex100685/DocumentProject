@@ -30,7 +30,7 @@ public class MyPdfConverter {
 		//final String TMP_DIR = System.getProperty("java.io.tmpdir");
 		//BaseFont bf = BaseFont.createFont("fonts/free/oldstandard/OldStandard-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 		//Font font = new Font(bf);
-		Font font =  FontFactory.getFont("arial", "UTF-8");
+		Font font =  FontFactory.getFont("Arial", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 		
 		//String FONTPATH = "/usr/share/fonts/truetype/msttcorefonts/ARIAL.TTF";
 		//Font font = FontFactory.getFont(FONTPATH, "UTF-8", BaseFont.EMBEDDED);
