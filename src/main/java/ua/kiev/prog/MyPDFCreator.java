@@ -21,12 +21,8 @@ public class MyPDFCreator {
 	
 public static byte [] createPdfWarning() throws XWPFConverterException, IOException, DocumentException{
 		
-	BaseFont helvetica =
-			  BaseFont.createFont(
-			    BaseFont.HELVETICA,
-			    BaseFont.CP1252,
-			    BaseFont.NOT_EMBEDDED);
-		Font font = new Font(helvetica);
+	BaseFont bf = BaseFont.createFont("/system/fonts/Comic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+	Font font = new Font(bf);
 		
 	
 		  

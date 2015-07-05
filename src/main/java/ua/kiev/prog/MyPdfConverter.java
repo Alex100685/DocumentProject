@@ -28,16 +28,12 @@ public class MyPdfConverter {
 		
 		
 		//final String TMP_DIR = System.getProperty("java.io.tmpdir");
-		BaseFont helvetica =
-				  BaseFont.createFont(
-				    BaseFont.HELVETICA,
-				    BaseFont.CP1252,
-				    BaseFont.NOT_EMBEDDED);
-			Font font = new Font(helvetica);
 		
 		
 		
-		
+		BaseFont bf = BaseFont.createFont("/system/fonts/Comic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		Font font = new Font(bf);
+
 		ByteArrayInputStream is = new ByteArrayInputStream(file);		
 		// FileInputStream is = new FileInputStream(TMP_DIR+"/"+fileName);
          // Read workbook into HSSFWorkbook
