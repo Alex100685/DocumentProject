@@ -450,7 +450,7 @@ public class MainController {
 		List <Receiver> rList = actions.ReceiverList();
 		Section s = actions.getSectionByName(sectionName);
 		
-		List <Document> dList = actions.DocumentList();
+		List <Document> dList = s.getDocuments();
 		int i;
 		for(i=0;i<dList.size(); i++){
 			if(!(dList.get(i).getInventaryNumber()).endsWith("."+String.valueOf(i+1))){
