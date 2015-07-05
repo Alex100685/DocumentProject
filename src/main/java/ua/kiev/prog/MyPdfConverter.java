@@ -28,11 +28,12 @@ public class MyPdfConverter {
 		
 		
 		//final String TMP_DIR = System.getProperty("java.io.tmpdir");
+		BaseFont bf = BaseFont.createFont("/system/fonts/Comic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		Font font = new Font(bf);
 		
 		
-		
-		String FONTPATH = "/usr/share/fonts/truetype/msttcorefonts/ARIAL.TTF";
-		Font font = FontFactory.getFont(FONTPATH, "UTF-8", BaseFont.EMBEDDED);
+		//String FONTPATH = "/usr/share/fonts/truetype/msttcorefonts/ARIAL.TTF";
+		//Font font = FontFactory.getFont(FONTPATH, "UTF-8", BaseFont.EMBEDDED);
 
 		ByteArrayInputStream is = new ByteArrayInputStream(file);		
 		// FileInputStream is = new FileInputStream(TMP_DIR+"/"+fileName);
