@@ -21,10 +21,10 @@ public class MyPDFCreator {
 	
 public static byte [] createPdfWarning() throws XWPFConverterException, IOException, DocumentException{
 		
-		//BaseFont bf = BaseFont.createFont("C:\\WINDOWS\\Fonts\\ARIAL.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //���������� ���� ������, ������� ������������ ���������
-		//Font font = new Font(bf);
+		BaseFont bf = BaseFont.createFont("/fonts/Sansation_Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED); //���������� ���� ������, ������� ������������ ���������
+		Font font = new Font(bf);
 		
-	Font font = FontFactory.getFont(FontFactory.TIMES,"Cp1251", com.lowagie.text.Font.BOLD);
+	
 		  
 		com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 		ByteArrayOutputStream file = null;
