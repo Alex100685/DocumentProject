@@ -26,7 +26,7 @@ public class MyWordPdfConverter {
 	public static byte [] convertWordToPdf(byte [] data) throws XWPFConverterException, IOException, DocumentException{
 		
 
-		BaseFont bf = BaseFont.createFont("/system/fonts/Comic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		BaseFont bf = BaseFont.createFont("c:/windows/fonts/arialbd.ttf", "Cp1251", BaseFont.EMBEDDED);
 		Font font = new Font(bf);
 
 		POIFSFileSystem fs = null;  
