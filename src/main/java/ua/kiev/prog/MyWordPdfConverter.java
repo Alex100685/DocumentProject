@@ -29,6 +29,8 @@ public class MyWordPdfConverter {
 		//Font font = new Font(bf);
 		Font font = FontFactory.getFont(FontFactory.TIMES,"Cp1251", com.lowagie.text.Font.BOLD);
 		
+		
+		
 		POIFSFileSystem fs = null;  
 		com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 		ByteArrayOutputStream file = null;
