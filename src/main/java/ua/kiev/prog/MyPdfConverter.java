@@ -31,8 +31,8 @@ public class MyPdfConverter {
 		
 		
 		
-		BaseFont bf = BaseFont.createFont("c:/windows/fonts/arialbd.ttf", "Cp1251", BaseFont.EMBEDDED);
-		Font font = new Font(bf);
+		String FONTPATH = "/usr/share/fonts/truetype/msttcorefonts/ARIAL.TTF";
+		Font font = FontFactory.getFont(FONTPATH, "UTF-8", BaseFont.EMBEDDED);
 
 		ByteArrayInputStream is = new ByteArrayInputStream(file);		
 		// FileInputStream is = new FileInputStream(TMP_DIR+"/"+fileName);
