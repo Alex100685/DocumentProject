@@ -12,9 +12,10 @@
     <a href="/client/">To Main</a>
 </head>
 <body>
-<a href="<c:url value="/j_spring_security_logout"/>"><h4>Logout</h4></a>
+
 
 <div class="container">
+<a href="<c:url value="/j_spring_security_logout"/>"><h4>Logout</h4></a>
     <h3>Documents List</h3>
 
 <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
