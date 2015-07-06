@@ -10,6 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
+
 <div class="container">
 
     <h3>Documents List</h3>

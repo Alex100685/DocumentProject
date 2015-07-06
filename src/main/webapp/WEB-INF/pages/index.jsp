@@ -12,6 +12,8 @@
     <a href="/client/">To Main</a>
 </head>
 <body>
+<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
+
 <div class="container">
     <h3>Documents List</h3>
 

@@ -41,7 +41,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 
 
 @Controller
-//@RequestMapping("/Main")
 public class MainController {
 
 	@Autowired
