@@ -245,9 +245,9 @@ out.println("</form>");
             <tr>	 
             <td align="center" style="width: 200px; "><b></b>
           				</td>  
-			<td align="left" style="width: 200px; color:blue "><b>${bigSection.id}</b>
+			<td align="left" style="width: 200px; color:black "><b><h3>${bigSection.id}</h3></b>
             				</td>
-			<td align="center" style="width: 200px; color:blue "><b>${bigSection.name}</b>
+			<td align="center" style="width: 200px; color:black "><b><h3>${bigSection.name}</h3></b>
             				</td>
             <td align="center" style="width: 200px; "><b></b>
             					</td>
@@ -261,7 +261,7 @@ out.println("</form>");
             <td align="center" style="width: 200px; "><b></b></td>
             		</td>
             		 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; color:red "><b><h5><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h5></b></td> 
+            <td align="center" style="width: 200px; color:red "><b><h3><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h3></b></td> 
             </sec:authorize> 
             <td align="center" style="width: 200px; "><b></b></td>
         			</tr>
@@ -273,9 +273,9 @@ out.println("</form>");
             	 
            	<td align="center" style="width: 200px; "><b></b>
           				</td>  
-			<td align="center" style="width: 200px; color:green"><b>${sect.id}</b>
+			<td align="center" style="width: 200px; color:black"><b><h4>${sect.id}</h4></b>
             				</td>
-			<td align="center" style="width: 200px; color:green"><b>${sect.name}</b>
+			<td align="center" style="width: 200px; color:black"><b><h4>${sect.name}</h4></b>
             				</td>
             <td align="center" style="width: 200px; "><b></b>
             					</td>
@@ -288,7 +288,7 @@ out.println("</form>");
               <td align="center" style="width: 200px; "><b></b></td>
                <td align="center" style="width: 200px; "><b></b></td>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b><h5><a style="color:green ;" href="/admin/deleteSection?id=${sect.id}">Delete</a></h5></b>
+            <td align="center" style="width: 200px; "><b><h4><a style="color:blue ;" href="/admin/deleteSection?id=${sect.id}">Delete</a></h4></b>
             		</td>
             		</sec:authorize> 
             	 <td align="center" style="width: 200px; "><b></b></td>
