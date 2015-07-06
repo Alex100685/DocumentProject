@@ -245,9 +245,9 @@ out.println("</form>");
             <tr>	 
             <td align="center" style="width: 200px; "><b></b>
           				</td>  
-			<td align="left" style="width: 200px; color:red "><b>${bigSection.id}</b>
+			<td align="left" style="width: 200px; color:blue "><b>${bigSection.id}</b>
             				</td>
-			<td align="center" style="width: 200px; color:red "><b>${bigSection.name}</b>
+			<td align="center" style="width: 200px; color:blue "><b>${bigSection.name}</b>
             				</td>
             <td align="center" style="width: 200px; "><b></b>
             					</td>
@@ -261,7 +261,7 @@ out.println("</form>");
             <td align="center" style="width: 200px; "><b></b></td>
             		</td>
             		 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; color:red "><b><h5><a style="color:red;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h5></b></td> 
+            <td align="center" style="width: 200px; color:red "><b><h5><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h5></b></td> 
             </sec:authorize> 
             <td align="center" style="width: 200px; "><b></b></td>
         			</tr>
