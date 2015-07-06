@@ -48,6 +48,11 @@ public interface Actions {
 	public void deletePublisher(Publisher p);
 	public void deleteReceiver(Receiver r);
 	public Receiver getReceiverById(int id);
+	public Fonts getFontByName(String string);
+	public List<Fonts> fontsList();
+	public void add(Fonts f);
+	public Fonts getFontById(int id);
+	public void deleteFont(Fonts f);
 	
 
 }

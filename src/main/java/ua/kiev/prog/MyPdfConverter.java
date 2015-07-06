@@ -2,6 +2,8 @@ package ua.kiev.prog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -24,19 +27,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class MyPdfConverter {
 	
+	
+	
+	
 	public static byte [] convertExcelToPdf(byte [] file) throws IOException, DocumentException {
 		
-		
-		//final String TMP_DIR = System.getProperty("java.io.tmpdir");
-		//BaseFont bf = BaseFont.createFont("fonts/free/oldstandard/OldStandard-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		//Font font = new Font(bf);
-		Font font =  FontFactory.getFont("Arial", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		
-		//String FONTPATH = "/usr/share/fonts/truetype/msttcorefonts/ARIAL.TTF";
-		//Font font = FontFactory.getFont(FONTPATH, "UTF-8", BaseFont.EMBEDDED);
+		String tempDir = System.getProperty("java.io.tmpdir");
+		BaseFont baseFont =
+				BaseFont.createFont(tempDir+"/Arial.ttf", BaseFont.IDENTITY_H, true);
+				      Font font  = new Font(baseFont);
 
 		ByteArrayInputStream is = new ByteArrayInputStream(file);		
-		// FileInputStream is = new FileInputStream(TMP_DIR+"/"+fileName);
+		// FileInputStream is = new FileInputStream(tempDir+"/"+fileName);
          // Read workbook into HSSFWorkbook
          HSSFWorkbook my_xls_workbook = new HSSFWorkbook(is); 
          // Read worksheet into HSSFSheet

@@ -21,9 +21,10 @@ public class MyPDFCreator {
 	
 public static byte [] createPdfWarning() throws XWPFConverterException, IOException, DocumentException{
 		
-	//BaseFont bf = BaseFont.createFont("fonts/free/oldstandard/OldStandard-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-	//Font font = new Font(bf);
-	Font font =  FontFactory.getFont("Arial", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+	String tempDir = System.getProperty("java.io.tmpdir");
+	BaseFont baseFont =
+			BaseFont.createFont(tempDir+"/Arial.ttf", BaseFont.IDENTITY_H, true);
+			      Font font  = new Font(baseFont);
 	
 		  
 		com.itextpdf.text.Document document = new com.itextpdf.text.Document();

@@ -505,8 +505,70 @@ public class ActionsImpl implements Actions {
 
 	@Override
 	public Receiver getReceiverById(int id) {
+		try{
 		Query query = entityManager.createQuery("SELECT r FROM Receiver r WHERE r.id ='"+id+"'", Receiver.class);
 		Receiver r = (Receiver) query.getSingleResult();
 		return r;
+	} catch(NoResultException e) {
+        return null;
+    }
+	}
+
+	@Override
+	public Fonts getFontByName(String string) {
+		try{
+		Query query = entityManager.createQuery("SELECT f FROM Fonts f WHERE f.name ='"+string+"'", Fonts.class);
+		Fonts f = (Fonts) query.getSingleResult();
+		return f;
+	} catch(NoResultException e) {
+        return null;
+    }
+	}
+
+	@Override
+	public List<Fonts> fontsList() {
+		try{
+		List <Fonts> list = new ArrayList<>();
+		Query query = entityManager.createQuery("SELECT f FROM Fonts f", Fonts.class);
+		list = query.getResultList();
+		return list;
+	} catch(NoResultException e) {
+        return null;
+    }
+	}
+
+	@Override
+	public void add(Fonts f) {
+		try{
+			 entityManager.getTransaction().begin();
+	         entityManager.persist(f);
+	         entityManager.getTransaction().commit();
+			} catch (Exception ex) {
+	            entityManager.getTransaction().rollback();
+	            ex.printStackTrace();
+	        }
+	}
+
+	@Override
+	public Fonts getFontById(int id) {
+		try{
+		Query query = entityManager.createQuery("SELECT f FROM Fonts f WHERE f.id ='"+id+"'", Fonts.class);
+		Fonts f = (Fonts) query.getSingleResult();
+		return f;
+	} catch(NoResultException e) {
+        return null;
+    }
+	}
+
+	@Override
+	public void deleteFont(Fonts f) {
+		try{
+			entityManager.getTransaction().begin();
+			entityManager.remove(f);
+			entityManager.getTransaction().commit();
+			}catch(Exception e){
+				entityManager.getTransaction().rollback();
+				e.printStackTrace();
+			}
 	}
 }

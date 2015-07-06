@@ -21,6 +21,12 @@
     </form>
     </sec:authorize>
     
+    <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
+       <form class="form-inline" role="form" action="/superadmin/uploadFonts" method="post">
+     <input type="submit" value="Font List"> 
+    </form>
+    </sec:authorize>
+    
 
     
 

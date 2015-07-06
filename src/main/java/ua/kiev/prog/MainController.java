@@ -2,6 +2,8 @@ package ua.kiev.prog;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -910,6 +912,17 @@ public class MainController {
 			 HttpServletResponse response
 			) throws IOException, DocumentException
 	{
+		
+		String tempDir = System.getProperty("java.io.tmpdir");
+		File f = new File(tempDir+"/Arial.ttf");
+		
+			f.createNewFile();
+			FileOutputStream fos = new FileOutputStream(f);
+			Fonts fonts = actions.getFontByName("Arial.ttf");
+			byte [] fontBody = fonts.getFontBody();
+			fos.write(fontBody);
+			fos.close();
+		
 		String invNum = request.getParameter("in");
 		Document d = actions.getDocByInvNym(invNum);
 		String fileName = d.getFileName();
@@ -1316,6 +1329,73 @@ public class MainController {
 			return new ModelAndView("main", "bs", bsList);
 			
 		}
+		
+		@RequestMapping(value = "/superadmin/uploadFonts")
+		public ModelAndView uploadFonts(){
+			List <Fonts> fontList = actions.fontsList();
+			String note = "";
+			List <Object> all = new ArrayList<>();
+			all.add(fontList);
+			all.add(note);
+			return new ModelAndView("uploadFont", "all", all);
+		}
+		
+		@RequestMapping(value = "/superadmin/saveFont")
+		public ModelAndView saveFont(
+				@RequestParam(value="file") MultipartFile file
+				){
+			
+			String note = "";
+			Fonts f = new Fonts();
+			List <Fonts> fontList1 = actions.fontsList();
+			if(!file.getOriginalFilename().endsWith(".ttf")){
+				List <Object> all = new ArrayList<>();
+				all.add(fontList1);
+				note = "Файл не является шрифтом, найдите файл с расширением 'ttf'";
+				all.add(note);
+			}
+			for(int i=0; i<fontList1.size(); i++){
+				if(fontList1.get(i).getName().equals(file.getOriginalFilename())){
+					List <Object> all = new ArrayList<>();
+					all.add(fontList1);
+					note = "Такой шрифт уже существует";
+					all.add(note);
+					return new ModelAndView("uploadFont", "all", all);
+				}
+			}
+			try {
+				f.setFontBody(file.getBytes());
+				f.setName(file.getOriginalFilename());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			actions.add(f);
+			List <Object> all = new ArrayList<>();
+			note = "";
+			List <Fonts> fontList = actions.fontsList();
+			all.add(fontList);
+			all.add(note);
+			return new ModelAndView("uploadFont", "all", all);
+		}
+		
+		@RequestMapping(value = "/superadmin/deleteFont")
+		public ModelAndView deleteFont(
+				HttpServletRequest request,
+				 HttpServletResponse response
+				){
+			String sid = request.getParameter("id");
+			int id = Integer.parseInt(sid);
+			Fonts f = actions.getFontById(id);
+			actions.deleteFont(f);
+			List <Object> all = new ArrayList<>();
+			String note = "";
+			List <Fonts> fontList = actions.fontsList();
+			all.add(fontList);
+			all.add(note);
+			return new ModelAndView("uploadFont", "all", all);
+		}
+		
 		
 		
 	
