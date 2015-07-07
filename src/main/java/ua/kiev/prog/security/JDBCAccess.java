@@ -114,6 +114,37 @@ public class JDBCAccess {
 	
    }
    
+   public void updateAuthorizedTrue(String name){
+	   Connection conn = null;
+	   PreparedStatement stmt = null;
+	   try{
+	      Class.forName("com.mysql.jdbc.Driver");
+	      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+	      String sql = "UPDATE users set authorized = 1 WHERE login='"+name+"'";
+	      stmt = conn.prepareStatement(sql);
+	      stmt.executeUpdate();  
+	      stmt.close();
+	      conn.close();
+	   }catch(SQLException se){
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      e.printStackTrace();
+	   }finally{
+	      try{
+	         if(stmt!=null)
+	            stmt.close();
+	      }catch(SQLException se2){
+	      }
+	      try{
+	         if(conn!=null)
+	            conn.close();
+	      }catch(SQLException se){
+	         se.printStackTrace();
+	      }
+	   }
+	
+   }
+   
    public boolean getAuthorizedByName(String name) throws ClassNotFoundException, SQLException{
 	   Connection conn = null;
 	   PreparedStatement stmt = null;

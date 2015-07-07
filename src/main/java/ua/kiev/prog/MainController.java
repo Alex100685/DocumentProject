@@ -34,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import ua.kiev.prog.security.JDBCAccess;
+
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -1052,6 +1054,7 @@ public class MainController {
 				allUsers.remove(i);
 			}
 		}
+		JDBCAccess access = new JDBCAccess();
 		for(int i=0; i<allUsers.size(); i++){
 			if(accesses.get(i).equals("Admin")){
 				allUsers.get(i).setGroup(gAdmins);
@@ -1065,9 +1068,11 @@ public class MainController {
 			if(authorized.get(i).equals("Yes")){
 				allUsers.get(i).setAuthorized(true);
 				allUsers.get(i).setLoginAttempts(0);
+				access.updateAuthorizedTrue(allUsers.get(i).getUsername());
 			}
 			if(authorized.get(i).equals("No")){
 				allUsers.get(i).setAuthorized(false);
+				access.updateAuthorizedFalse(allUsers.get(i).getUsername());
 			}	
 			actions.add(allUsers.get(i));
 		}
