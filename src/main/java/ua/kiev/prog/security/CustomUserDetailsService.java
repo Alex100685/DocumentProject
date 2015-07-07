@@ -13,6 +13,7 @@ import ua.kiev.prog.Group;
 import ua.kiev.prog.User;
 
 import java.lang.Override;import java.lang.String;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -53,6 +54,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public List<String> getRoles(Group group, User user) {
         List<String> roles = new ArrayList<String>();
+        JDBCAccess access = new JDBCAccess();
+        try {
+        	if(!user.getUsername().equals("superadmin")){
+			user.setAuthorized(access.getAuthorizedByName(user.getUsername()));
+        	}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         if(user.isAuthorized() == true && group != null && group.getName().equals("Admins")) {
             roles.add("ROLE_ADMIN");

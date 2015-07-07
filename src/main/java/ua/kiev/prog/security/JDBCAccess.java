@@ -111,16 +111,26 @@ public class JDBCAccess {
 	         se.printStackTrace();
 	      }
 	   }
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+	
    }
    
-   
+   public boolean getAuthorizedByName(String name) throws ClassNotFoundException, SQLException{
+	   Connection conn = null;
+	   PreparedStatement stmt = null;
+	   Class.forName("com.mysql.jdbc.Driver");
+	   conn = DriverManager.getConnection(DB_URL,USER,PASS);
+	   String sql = "SELECT authorized FROM users WHERE login = '"+name+"'";
+	   stmt = conn.prepareStatement(sql);
+	   ResultSet rs = stmt.executeQuery(sql);
+	   boolean authorized = false;
+	   while(rs.next()){
+		   authorized  = rs.getBoolean("authorized");
+	   }
+	   	rs.close();
+	      stmt.close();
+	      conn.close(); 
+	return authorized;
+   }
    
    
    

@@ -69,7 +69,7 @@ public class AuthenticationListener implements ApplicationListener <AbstractAuth
 								e.printStackTrace();
 							}
                         	Date date = new Date();
-                        	DateFormat df = new SimpleDateFormat("MM.dd.yyyy'�' HH:mm:ss z");
+                        	DateFormat df = new SimpleDateFormat("MM.dd.yyyy'в' HH:mm:ss z");
                         	String d = df.format(date);
                         	
 String text = "Возможно была попытка несанкционированного доступа "+d+". Ваш профиль в сервисе документов был заблокирован по причине неправильного ввода пароля более 3-х раз, для восстановления доступа обратитесь к администратору. В случе если Вы подозреваете что было место попытки несанкционированного доступа, рекомендовано зарегистрироваться под другим логином после чего уведомить администратора";
