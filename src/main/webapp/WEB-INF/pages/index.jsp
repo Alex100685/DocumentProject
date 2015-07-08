@@ -237,8 +237,8 @@ out.println("</form>");
             	
             	 <c:forEach items="${document}" var="document">
             <tr>
-            <td align="right" style="width: 200px; "><input type="checkbox" name="id []" value="${document.inventaryNumber}"></td>
-            	<td align="center" style="width: 200px; ">${document.inventaryNumber}</td>
+            <td align="center" style="width: 200px; "><input type="checkbox" name="id []" value="${document.inventaryNumber}"></td>
+            	<td align="right" style="width: 200px; ">${document.inventaryNumber}</td>
             	<td align="center" style="width: 200px; ">${document.name}</td>
             	<td align="center" style="width: 200px; ">${document.publisher.name}</td>
             	<td align="center" style="width: 200px; ">${document.publishDate}</td>
