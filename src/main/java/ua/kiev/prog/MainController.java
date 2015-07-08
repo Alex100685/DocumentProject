@@ -51,20 +51,6 @@ public class MainController {
 	@Autowired
     private ShaPasswordEncoder passwordEncoder;
 	
-	/*@RequestMapping(value="/login", method= RequestMethod.GET)
-    public ModelAndView loginForm() {
-        return new ModelAndView("login");
-    }*/
-
-   /* @RequestMapping(value="/error-login", method=RequestMethod.GET)
-    public ModelAndView invalidLogin() {
-        ModelAndView modelAndView = new ModelAndView("login");
-        modelAndView.addObject("error", true);
-        return modelAndView;
-    }*/
-	
-	
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome() {
         return "login";
