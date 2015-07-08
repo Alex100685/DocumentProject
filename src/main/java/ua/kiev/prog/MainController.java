@@ -51,10 +51,10 @@ public class MainController {
 	@Autowired
     private ShaPasswordEncoder passwordEncoder;
 	
-	@RequestMapping(value="/login", method= RequestMethod.GET)
+	/*@RequestMapping(value="/login", method= RequestMethod.GET)
     public ModelAndView loginForm() {
         return new ModelAndView("login");
-    }
+    }*/
 
     @RequestMapping(value="/error-login", method=RequestMethod.GET)
     public ModelAndView invalidLogin() {
