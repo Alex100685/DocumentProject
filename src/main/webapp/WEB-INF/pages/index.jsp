@@ -123,11 +123,7 @@ out.println("</form>");
 %>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 <a href="/admin/addPublisherFromMain">add</a>
-</sec:authorize> 
-
 |
-
-<sec:authorize access="hasRole('ROLE_ADMIN')">
 <a href="/admin/deletePublisherFromMain">delete</a>
 </sec:authorize> 
             </td>
@@ -165,11 +161,7 @@ out.println("</form>");
 %>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 <a href="/admin/addReceiverFromMain">add</a>
-</sec:authorize> 
-
 |
-
-<sec:authorize access="hasRole('ROLE_ADMIN')">
 <a href="/admin/deleteReceiverFromMain">delete</a>
 </sec:authorize> 
             </td>
