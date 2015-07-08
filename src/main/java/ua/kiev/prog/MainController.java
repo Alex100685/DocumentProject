@@ -56,6 +56,13 @@ public class MainController {
         return "login";
     }
 	
+	@RequestMapping(value = "/error-login", method = RequestMethod.POST)
+	public ModelAndView errorLogin(){
+		return new ModelAndView("login", "errMsg", "Wrong login or password");
+	}
+	
+	
+	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView listClients(
             @RequestParam String login,
@@ -64,7 +71,7 @@ public class MainController {
             @RequestParam String password,
             @RequestParam String password2
     ) {
-
+		
         if(!password.equals(password2)) {
             return new ModelAndView("login", "errMsg", "Password and confirm password values are not equal!");
         }
