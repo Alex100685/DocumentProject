@@ -56,7 +56,7 @@ public class MainController {
         return "login";
     }
 	
-	@RequestMapping(value = "/error-login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginError", method = RequestMethod.POST)
 	public ModelAndView errorLogin(){
 		return new ModelAndView("login", "errMsg", "Wrong login or password");
 	}
