@@ -56,12 +56,12 @@ public class MainController {
         return new ModelAndView("login");
     }*/
 
-    @RequestMapping(value="/error-login", method=RequestMethod.GET)
+   /* @RequestMapping(value="/error-login", method=RequestMethod.GET)
     public ModelAndView invalidLogin() {
         ModelAndView modelAndView = new ModelAndView("login");
         modelAndView.addObject("error", true);
         return modelAndView;
-    }
+    }*/
 	
 	
 	
