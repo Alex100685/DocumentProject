@@ -37,6 +37,7 @@
 	width:100%;
 	margin:0px;padding:0px;
 }
+.container tr:last-child td:last-child {
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -292,7 +293,7 @@ out.println("</form>");
             <td align="center" style="width: 200px; "><b></b></td>
             		</td>
             		 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; color:red "><b><h3><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h3></b></td> 
+            <td align="center" style="width: 200px; color:red "><h3><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h3></td> 
             </sec:authorize> 
             <td align="center" style="width: 200px; "><b></b></td>
         			</tr>
@@ -319,7 +320,7 @@ out.println("</form>");
               <td align="center" style="width: 200px; "><b></b></td>
                <td align="center" style="width: 200px; "><b></b></td>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b><h4><a style="color:blue ;" href="/admin/deleteSection?id=${sect.id}">Delete</a></h4></b>
+            <td align="center" style="width: 200px; "><h4><a style="color:blue ;" href="/admin/deleteSection?id=${sect.id}">Delete</a></h4>
             		</td>
             		</sec:authorize> 
             	 <td align="center" style="width: 200px; "><b></b></td>
