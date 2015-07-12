@@ -42,6 +42,11 @@
 	-webkit-border-bottom-right-radius:4px;
 	border-bottom-right-radius:4px;
 }
+.container table tr:first-child td:first-child {
+	-moz-border-radius-topleft:4px;
+	-webkit-border-top-left-radius:4px;
+	border-top-left-radius:4px;
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
