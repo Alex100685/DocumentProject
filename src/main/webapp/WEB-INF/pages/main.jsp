@@ -9,7 +9,7 @@
       font-weight:bold;
     } 
     body{
-    background-color: rjb(120, 50, 120);
+    background-color: rgb(200,0,200);
     }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

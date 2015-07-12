@@ -8,10 +8,8 @@
     a:hover {
       font-weight:bold;
     } 
-</style>
-<style>
     body{
-    background-color: rgb(120,0,120);
+    background-color: rgb(200,0,200);
     }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
