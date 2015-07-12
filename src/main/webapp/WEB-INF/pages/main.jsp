@@ -47,6 +47,18 @@
 	-webkit-border-top-left-radius:4px;
 	border-top-left-radius:4px;
 }
+.container table tr:first-child td:last-child {
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+	border-top-right-radius:4px;
+	
+}.container tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:4px;
+	-webkit-border-bottom-left-radius:4px;
+	border-bottom-left-radius:4px;
+}.container tr:hover td{
+	
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
