@@ -185,12 +185,7 @@ out.println("<form action=\"/client/sortByPublisher\" style=\"width: 53px; \">")
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
 }
-%>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-<a href="/admin/addPublisherFromMain">add</a>
-|
-<a href="/admin/deletePublisherFromMain">delete</a>
-</sec:authorize>  
+%>  
             </td>
             
          
@@ -224,11 +219,6 @@ out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-<a href="/admin/addReceiverFromMain">add</a>
-|
-<a href="/admin/deleteReceiverFromMain">delete</a>
-</sec:authorize> 
             </td>
             
             
@@ -285,6 +275,66 @@ out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
+            </td>
+            
+            <td align="center" style="width: 200px; "></td>
+            <td align="center" style="width: 200px; "></td>
+            
+            
+            
+        </tr>
+       <h1> </thead>
+       
+       <thead>
+        <tr>    
+            
+            
+            <td align="center" style="width: 200px; "></td>
+            
+			<td align="center" style="width: 200px; "></td>
+            
+            <td align="center" style="width: 200px; ">
+          </td>  
+        
+<td align="center" style="width: 200px; ">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+<a href="/admin/addPublisherFromMain">add</a>
+|
+<a href="/admin/deletePublisherFromMain">delete</a>
+</sec:authorize>  
+            </td>
+            
+         
+        
+<td align="center" style="width: 200px; ">
+            </td>
+            
+            
+            <td align="center" style="width: 200px; ">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+<a href="/admin/addReceiverFromMain">add</a>
+|
+<a href="/admin/deleteReceiverFromMain">delete</a>
+</sec:authorize> 
+            </td>
+            
+            
+            
+            
+            
+            <td align="center" style="width: 200px; "></td>
+            
+            
+            
+            
+            <td align="center" style="width: 200px; ">
+            </td>
+            
+            <td align="center" style="width: 200px; "></td>
+            
+            
+            
+            <td align="center" style="width: 200px; ">
             </td>
             
             <td align="center" style="width: 200px; "></td>
