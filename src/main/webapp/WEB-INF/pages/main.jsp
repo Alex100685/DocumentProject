@@ -38,6 +38,10 @@
 	margin:0px;padding:0px;
 }
 .container tr:last-child td:last-child {
+-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
