@@ -59,7 +59,7 @@
 }.container tr:hover td{
 	
 }
-.container tr:nth-child(odd){ background-color:#d4ffaa; 
+.container tr:nth-child(even){ background-color:#d4ffaa; 
 }
 
 </style>
