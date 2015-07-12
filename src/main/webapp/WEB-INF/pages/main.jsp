@@ -11,7 +11,6 @@
 </head>
 <style>
     a:hover {
-      background:#ccc
       font-weight:bold;
     }
     
