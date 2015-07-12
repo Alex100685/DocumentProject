@@ -8,11 +8,6 @@
     a:hover {
       font-weight:bold;
     } 
-    body{
-    width: 100%;
-  	height: 100%;
-    background-color: rgb(200,0,200);
-    }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>mazurov.company</title>
