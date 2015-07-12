@@ -4,6 +4,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
+<style>
+    a:hover {
+      font-weight:bold;
+    } 
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>mazurov.company</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -11,11 +16,6 @@
     <a href="javascript:history.back()">Go Back</a>
     <a href="/client/">To Main</a>
 </head>
-<style>
- a:hover {
-      background:#ccc
-    }
-</style>
 <body>
 
 
