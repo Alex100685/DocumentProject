@@ -8,6 +8,28 @@
     a:hover {
       font-weight:bold;
     } 
+    .container {
+	margin:0px;padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #3f7f00;
+	
+	-moz-border-radius-bottomleft:4px;
+	-webkit-border-bottom-left-radius:4px;
+	border-bottom-left-radius:4px;
+	
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+	
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+	border-top-right-radius:4px;
+	
+	-moz-border-radius-topleft:4px;
+	-webkit-border-top-left-radius:4px;
+	border-top-left-radius:4px;
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -67,6 +89,8 @@
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px;"><b></b></td>
+            <td align="center" style="width: 200px;"><b></b></td>
             </sec:authorize>
             
         </tr>

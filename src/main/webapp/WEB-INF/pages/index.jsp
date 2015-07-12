@@ -65,6 +65,7 @@
             <td align="center" style="width: 200px;"><b></b></td>
             <td align="center" style="width: 200px;"><b></b></td>
             <td align="center" style="width: 200px;"><b></b></td>
+            <td align="center" style="width: 200px;"><b></b></td>
             
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px;"><b></b></td>
