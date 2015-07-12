@@ -61,7 +61,7 @@
 }
 .container tr:nth-child(even){ background-color:#d4ffaa; 
 }
-
+.container tr:nth-child(even)    { background-color:#ffffff; }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>mazurov.company</title>
