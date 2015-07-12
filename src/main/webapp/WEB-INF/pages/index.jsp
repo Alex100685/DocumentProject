@@ -8,6 +8,41 @@
     a:hover {
       font-weight:bold;
     } 
+    .container {
+	margin:0px;padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #3f7f00;
+	
+	-moz-border-radius-bottomleft:4px;
+	-webkit-border-bottom-left-radius:4px;
+	border-bottom-left-radius:4px;
+	
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+	
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+	border-top-right-radius:4px;
+	
+	-moz-border-radius-topleft:4px;
+	-webkit-border-top-left-radius:4px;
+	border-top-left-radius:4px;
+}
+
+.container table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	margin:0px;padding:0px;
+}
+.container tr:last-child td:last-child {
+-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>mazurov.company</title>
@@ -43,14 +78,12 @@
     
     <thead>
         <tr>
-        
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <td align="center" style="width: 200px; "><b></b></td>
         </sec:authorize>
-        
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByInvNumb" method="post" style="width: 100px; ">
         
-        <input type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by numb" style="width: 100px; ">
+        <input type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Number" style="width: 100px; ">
     </form></b></td>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByName" method="post" style="width: 200px; ">
         
@@ -60,17 +93,17 @@
         
         <input type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Publisher" style="width: 200px; ">
     </form></b></td>
-            <td align="center" style="width: 200px;"><b></b></td>
-            <td align="center" style="width: 200px;"><b></b></td>
-            <td align="center" style="width: 200px;"><b></b></td>
-            <td align="center" style="width: 200px;"><b></b></td>
-            <td align="center" style="width: 200px;"><b></b></td>
-            <td align="center" style="width: 200px;"><b></b></td>
+            <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px; "><b></b></td>
             
             <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px;"><b></b></td>
             <td align="center" style="width: 200px;"><b></b></td>
             </sec:authorize>
-            <td><b></b></td>
             
         </tr>
         </thead>
@@ -78,14 +111,40 @@
         	
       <thead>
         <tr>
+        
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         	<td align="center" style="width: 200px; "><b>Select</b></td>
         	</sec:authorize>
         	
-            <td align="center" style="width: 200px; "><b>Inv.number</b>
-
+            <td align="center" style="width: 200px; "><b>Inv.number</b></td>
+            
+            <td align="center" style="width: 200px; "><b>Name</b></td>
+            <td align="center" style="width: 200px; "><b>Publisher</b></td>
+            <td align="center" style="width: 200px; "><b>Publ.date</b></td>
+            <td align="center" style="width: 200px; "><b> Receiver </b></td>
+            <td align="center" style="width: 200px; "><b>Doc.type</b></td>
+            <td align="center" style="width: 200px; "><b>Quantity</b></td>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <td align="center" style="width: 200px; "><b>Edit</b></td>
+            </sec:authorize>
+            <td align="center" style="width: 200px; "><b>Note</b></td>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <td align="center" style="width: 200px; "><b>Action</b></td>
+            </sec:authorize> 
+            <td align="center" style="width: 200px; "><b>View</b></td>
+            </tr>
+       </thead>
+        
+        
+        <thead>
+        <tr>    
+            
+            
+            <td align="center" style="width: 200px; "></td>
+            
+			<td align="center" style="width: 200px; ">
 <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByInvNum")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByInvNum")){
 out.println("<form action=\"/client/sortByInvNumRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -98,10 +157,10 @@ out.println("</form>");
 %>
             </td>
             
-            <td align="center" style="width: 200px; "><b>Name</b>
+            <td align="center" style="width: 200px; ">
             
             <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByName")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByName")){
 out.println("<form action=\"/client/sortByNameRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -114,9 +173,9 @@ out.println("</form>");
 %>
           </td>  
         
-<td align="center" style="width: 200px;"><b>Publisher</b>
+<td align="center" style="width: 200px; ">
       <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByPublisher")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublisher")){
 out.println("<form action=\"/client/sortByPublisherRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -131,14 +190,14 @@ out.println("</form>");
 <a href="/admin/addPublisherFromMain">add</a>
 |
 <a href="/admin/deletePublisherFromMain">delete</a>
-</sec:authorize> 
+</sec:authorize>  
             </td>
             
-             </td>  
+         
         
-<td align="center" style="width: 200px;"><b>Publ.Date</b>
+<td align="center" style="width: 200px; ">
       <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByPublishDate")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublishDate")){
 out.println("<form action=\"/client/sortByPublishDateRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -152,9 +211,9 @@ out.println("</form>");
             </td>
             
             
-            <td align="center" style="width: 200px;"><b> Receiver </b>
+            <td align="center" style="width: 200px; ">
         <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByStatus")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByStatus")){
 out.println("<form action=\"/client/sortByStatusRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -176,9 +235,9 @@ out.println("</form>");
             
             
             
-            <td align="center" style="width: 200px;"><b>Doc.type</b>
+            <td align="center" style="width: 200px; ">
      <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByDocType")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByDocType")){
 out.println("<form action=\"/client/sortByDocTypeRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -194,9 +253,9 @@ out.println("</form>");
             
             
             
-            <td align="center" style="width: 200px;"><b>Quantity</b>
+            <td align="center" style="width: 200px; ">
       <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByQuantity")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByQuantity")){
 out.println("<form action=\"/client/sortByQuantityRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -209,13 +268,13 @@ out.println("</form>");
 %>
             </td>
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b>Edit</b></td>
-            </sec:authorize>
+            <td align="center" style="width: 200px; "></td>
             
-            <td align="center" style="width: 200px;"><b>Note</b>
+            
+            
+            <td align="center" style="width: 200px; ">
        <% 
-if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/sortByNote")){
+if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByNote")){
 out.println("<form action=\"/client/sortByNoteRev\" style=\"width: 53px; \">");
 out.println("<button type=\"submit\">sort</button>");
 out.println("</form>");
@@ -228,14 +287,13 @@ out.println("</form>");
 %>
             </td>
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b>Action</b></td>
-             </sec:authorize>
+            <td align="center" style="width: 200px; "></td>
+            <td align="center" style="width: 200px; "></td>
             
-            <td align="center" style="width: 200px; "><b>View</b></td>
+            
             
         </tr>
-        </thead>
+       <h1> </thead>
         
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <form method="post" action="/admin/deleteDocuments">

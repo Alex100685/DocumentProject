@@ -116,8 +116,33 @@
         	<td align="center" style="width: 200px; "><b>Select</b></td>
         	</sec:authorize>
         	
-            <td align="center" style="width: 200px; "><b>Inv.number</b>
-
+            <td align="center" style="width: 200px; "><b>Inv.number</b></td>
+            
+            <td align="center" style="width: 200px; "><b>Name</b></td>
+            <td align="center" style="width: 200px; "><b>Publisher</b></td>
+            <td align="center" style="width: 200px; "><b>Publ.date</b></td>
+            <td align="center" style="width: 200px; "><b> Receiver </b></td>
+            <td align="center" style="width: 200px; "><b>Doc.type</b></td>
+            <td align="center" style="width: 200px; "><b>Quantity</b></td>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <td align="center" style="width: 200px; "><b>Edit</b></td>
+            </sec:authorize>
+            <td align="center" style="width: 200px; "><b>Note</b></td>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <td align="center" style="width: 200px; "><b>Action</b></td>
+            </sec:authorize> 
+            <td align="center" style="width: 200px; "><b>View</b></td>
+            </tr>
+       </thead>
+        
+        
+        <thead>
+        <tr>    
+            
+            
+            <td align="center" style="width: 200px; "></td>
+            
+			<td align="center" style="width: 200px; ">
 <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByInvNum")){
 out.println("<form action=\"/client/sortByInvNumRev\" style=\"width: 53px; \">");
@@ -132,7 +157,7 @@ out.println("</form>");
 %>
             </td>
             
-            <td align="center" style="width: 200px; "><b>Name</b>
+            <td align="center" style="width: 200px; ">
             
             <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByName")){
@@ -148,7 +173,7 @@ out.println("</form>");
 %>
           </td>  
         
-<td align="center" style="width: 200px; "><b>Publisher</b>
+<td align="center" style="width: 200px; ">
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublisher")){
 out.println("<form action=\"/client/sortByPublisherRev\" style=\"width: 53px; \">");
@@ -170,7 +195,7 @@ out.println("</form>");
             
          
         
-<td align="center" style="width: 200px; "><b>Publ.date</b>
+<td align="center" style="width: 200px; ">
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublishDate")){
 out.println("<form action=\"/client/sortByPublishDateRev\" style=\"width: 53px; \">");
@@ -186,7 +211,7 @@ out.println("</form>");
             </td>
             
             
-            <td align="center" style="width: 200px; "><b> Receiver </b>
+            <td align="center" style="width: 200px; ">
         <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByStatus")){
 out.println("<form action=\"/client/sortByStatusRev\" style=\"width: 53px; \">");
@@ -210,7 +235,7 @@ out.println("</form>");
             
             
             
-            <td align="center" style="width: 200px; "><b>Doc.type</b>
+            <td align="center" style="width: 200px; ">
      <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByDocType")){
 out.println("<form action=\"/client/sortByDocTypeRev\" style=\"width: 53px; \">");
@@ -228,7 +253,7 @@ out.println("</form>");
             
             
             
-            <td align="center" style="width: 200px; "><b>Quantity</b>
+            <td align="center" style="width: 200px; ">
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByQuantity")){
 out.println("<form action=\"/client/sortByQuantityRev\" style=\"width: 53px; \">");
@@ -243,11 +268,11 @@ out.println("</form>");
 %>
             </td>
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b>Edit</b></td>
-            </sec:authorize>
+            <td align="center" style="width: 200px; "></td>
             
-            <td align="center" style="width: 200px; "><b>Note</b>
+            
+            
+            <td align="center" style="width: 200px; ">
        <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByNote")){
 out.println("<form action=\"/client/sortByNoteRev\" style=\"width: 53px; \">");
@@ -262,11 +287,9 @@ out.println("</form>");
 %>
             </td>
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b>Action</b></td>
-            </sec:authorize> 
+            <td align="center" style="width: 200px; "></td>
+            <td align="center" style="width: 200px; "></td>
             
-            <td align="center" style="width: 200px; "><b>View</b></td>
             
             
         </tr>
@@ -297,7 +320,7 @@ out.println("</form>");
             <td align="center" style="width: 200px; "><b></b></td>
             		</td>
             		 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; color:red "><h3><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a><h3></td> 
+            <td align="center" style="width: 200px; color:red "><a style="color:blue;" href="/admin/deleteBigSection?id=${bigSection.id}">Delete</a></td> 
             </sec:authorize> 
             <td align="center" style="width: 200px; "><b></b></td>
         			</tr>
@@ -324,7 +347,7 @@ out.println("</form>");
               <td align="center" style="width: 200px; "><b></b></td>
                <td align="center" style="width: 200px; "><b></b></td>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><h4><a style="color:blue ;" href="/admin/deleteSection?id=${sect.id}">Delete</a></h4>
+            <td align="center" style="width: 200px; "><a style="color:blue ;" href="/admin/deleteSection?id=${sect.id}">Delete</a>
             		</td>
             		</sec:authorize> 
             	 <td align="center" style="width: 200px; "><b></b></td>
