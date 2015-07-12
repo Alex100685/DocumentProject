@@ -59,6 +59,8 @@
 }.container tr:hover td{
 	
 }
+.container tr:nth-child(odd){ background-color:#d4ffaa; 
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
