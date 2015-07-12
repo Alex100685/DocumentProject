@@ -12,12 +12,7 @@
 <style>
     a:hover {
       background:#ccc
-    }
-    h3 {
-    background:#D2691E
-    }
-    h4 {
-    background:#FF8C00
+      font-weight:bold;
     }
     
 </style>
