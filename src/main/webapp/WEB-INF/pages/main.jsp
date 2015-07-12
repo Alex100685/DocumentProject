@@ -31,6 +31,14 @@
 	border-top-left-radius:4px;
 }
 
+.container table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>mazurov.company</title>
