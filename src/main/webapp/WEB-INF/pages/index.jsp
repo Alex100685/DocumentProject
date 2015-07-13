@@ -5,42 +5,111 @@
 <html>
 <head>
 <style>
-    a:hover {
+ a:hover {
       font-weight:bold;
-    } 
-    .container {
-	margin:0px;padding:0px;
-	width:100%;
-	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #3f7f00;
-	
-	-moz-border-radius-bottomleft:4px;
-	-webkit-border-bottom-left-radius:4px;
-	border-bottom-left-radius:4px;
-	
-	-moz-border-radius-bottomright:4px;
-	-webkit-border-bottom-right-radius:4px;
-	border-bottom-right-radius:4px;
-	
-	-moz-border-radius-topright:4px;
-	-webkit-border-top-right-radius:4px;
-	border-top-right-radius:4px;
-	
-	-moz-border-radius-topleft:4px;
-	-webkit-border-top-left-radius:4px;
-	border-top-left-radius:4px;
+    }
+    
+ .search {
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: .2em 1.2em;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all .218s ease 0s;
+}
+.search:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.search:active {
+  color: rgb(51,51,51);
+  border: 1px solid rgb(204,204,204);
+  background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+  box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+}
+    
+    .DeleteButton {
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: .2em 1.2em;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: #f7f7f7 linear-gradient(#faa3a3, #ff7070);
+  transition: all .218s ease 0s;
 }
 
-.container table{
-    border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	margin:0px;padding:0px;
+.DeleteButton:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#faa3a3, #ff7070);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
-.container tr:last-child td:last-child {
--moz-border-radius-bottomright:4px;
-	-webkit-border-bottom-right-radius:4px;
-	border-bottom-right-radius:4px;
+
+.ViewButton {
+   
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: .2em 1.2em;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all .218s ease 0s;
+}
+
+.ViewButton:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  
+}
+
+    .flat-table {
+  display: block;
+  font-family: arial;
+  -webkit-font-smoothing: antialiased;
+  font-size: 115%;
+  overflow: auto;
+  width: auto;
+  }
+  th {
+    background-color: rgb(112,196,105);
+    color: white;
+    font-weight: normal;
+    padding: 5px 20px;
+    text-align: center;
+  }
+  td {
+    background-color: rgb(238, 238, 238);
+    color: rgb(111, 111, 111);
+    padding: 5px 20px;
+  }
+  .options{
+  display: block;
+  }
+div#formline *{
+display:inline
 }
 
 </style>
@@ -58,17 +127,22 @@
 <a href="<c:url value="/j_spring_security_logout"/>"><h4>Logout</h4></a>
     <h3>Documents List</h3>
 
-<sec:authorize access="hasRole('ROLE_SUPERADMIN')">
+<div id="formline">
+    
+     <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
        <form class="form-inline" role="form" action="/superadmin/accessManagement" method="post">
-     <input type="submit" value="Access Management"> 
+     <input type="submit" class="search" value="Access Management"> 
     </form>
     </sec:authorize>
     
-    <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
+    
+    
+     <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
        <form class="form-inline" role="form" action="/superadmin/uploadFonts" method="post">
-     <input type="submit" value="Font List"> 
+     <input type="submit" class="search" value="Font List"> 
     </form>
     </sec:authorize>
+</div>
     
 
     
@@ -83,15 +157,15 @@
         </sec:authorize>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByInvNumb" method="post" style="width: 100px; ">
         
-        <input type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Number" style="width: 100px; ">
+        <input class="search" type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Number" style="width: 100px; ">
     </form></b></td>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByName" method="post" style="width: 200px; ">
         
-        <input type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Name" style="width: 200px; ">
+        <input class="search" type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Name" style="width: 200px; ">
     </form></b></td>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByPublisher" method="post" style="width: 200px; ">
         
-        <input type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Publisher" style="width: 200px; ">
+        <input class="search" type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Publisher" style="width: 200px; ">
     </form></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
@@ -113,25 +187,25 @@
         <tr>
         
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-        	<td align="center" style="width: 200px; "><b>Select</b></td>
+        	<th align="center" style="width: 200px; "><b>Select</b></th>
         	</sec:authorize>
         	
-            <td align="center" style="width: 200px; "><b>Inv.number</b></td>
+            <th align="center" style="width: 200px; "><b>Inv.number</b></th>
             
-            <td align="center" style="width: 200px; "><b>Name</b></td>
-            <td align="center" style="width: 200px; "><b>Publisher</b></td>
-            <td align="center" style="width: 200px; "><b>Publ.date</b></td>
-            <td align="center" style="width: 200px; "><b> Receiver </b></td>
-            <td align="center" style="width: 200px; "><b>Doc.type</b></td>
-            <td align="center" style="width: 200px; "><b>Quantity</b></td>
+            <th align="center" style="width: 200px; "><b>Name</b></th>
+            <th align="center" style="width: 200px; "><b>Publisher</b></th>
+            <th align="center" style="width: 200px; "><b>Publ.date</b></th>
+            <th align="center" style="width: 200px; "><b> Receiver </b></th>
+            <th align="center" style="width: 200px; "><b>Doc.type</b></th>
+            <th align="center" style="width: 200px; "><b>Quantity</b></th>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b>Edit</b></td>
+            <th align="center" style="width: 200px; "><b>Edit</b></th>
             </sec:authorize>
-            <td align="center" style="width: 200px; "><b>Note</b></td>
+            <th align="center" style="width: 200px; "><b>Note</b></th>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b>Action</b></td>
+            <th align="center" style="width: 200px; "><b>Action</b></th>
             </sec:authorize> 
-            <td align="center" style="width: 200px; "><b>View</b></td>
+            <th align="center" style="width: 200px; "><b>View</b></th>
             </tr>
        </thead>
         
@@ -146,12 +220,12 @@
 <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByInvNum")){
 out.println("<form action=\"/client/sortByInvNumRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByInvNum\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -162,12 +236,12 @@ out.println("</form>");
             <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByName")){
 out.println("<form action=\"/client/sortByNameRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByName\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -177,12 +251,12 @@ out.println("</form>");
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublisher")){
 out.println("<form action=\"/client/sortByPublisherRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByPublisher\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>  
@@ -194,12 +268,12 @@ out.println("</form>");
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublishDate")){
 out.println("<form action=\"/client/sortByPublishDateRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByPublishDate\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -210,12 +284,12 @@ out.println("</form>");
         <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByStatus")){
 out.println("<form action=\"/client/sortByStatusRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByStatus\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -229,12 +303,12 @@ out.println("</form>");
      <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByDocType")){
 out.println("<form action=\"/client/sortByDocTypeRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByDocType\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -247,12 +321,12 @@ out.println("</form>");
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByQuantity")){
 out.println("<form action=\"/client/sortByQuantityRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByQuantity\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -266,12 +340,12 @@ out.println("</form>");
        <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByNote")){
 out.println("<form action=\"/client/sortByNoteRev\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByNote\" style=\"width: 53px; \">");
-out.println("<button type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\">sort</button>");
 out.println("</form>");
 }
 %>
@@ -361,19 +435,19 @@ out.println("</form>");
             	<td align="center" style="width: 200px; ">${document.quantity}</td>
             	
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
-            	<td align="center" style="width: 200px; "><a href="/admin/edit?in=${document.inventaryNumber}">Edit</a></td>
+            	<td align="center" style="width: 200px; "><a class="search" href="/admin/edit?in=${document.inventaryNumber}">Edit</a></td>
             	</sec:authorize>
             	
             	<td align="center" style="width: 200px; ">${document.note}</td>
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
             	<td align="center" style="width: 200px; ">
-            	<c:if test="${document.fileName == null}"><a href="/admin/uploadFile?in=${document.inventaryNumber}">Upload file</a></c:if>
-            	<c:if test="${document.fileName != null}"><a href="/admin/downloadFile?in=${document.inventaryNumber}">Download file</a></c:if>
+            	<c:if test="${document.fileName == null}"><a class="search" href="/admin/uploadFile?in=${document.inventaryNumber}">Upload file</a></c:if>
+            	<c:if test="${document.fileName != null}"><a class="search" href="/admin/downloadFile?in=${document.inventaryNumber}">Download file</a></c:if>
             	</td>
             	</sec:authorize> 
             	
             	<td align="center" style="width: 200px; ">
-            	<c:if test="${document.fileName != null}"><a href="/client/seeFile?in=${document.inventaryNumber}">View</a></c:if>
+            	<c:if test="${document.fileName != null}"><a class="search" href="/client/seeFile?in=${document.inventaryNumber}">View</a></c:if>
             	</td>
             	
                  </tr>
@@ -381,7 +455,7 @@ out.println("</form>");
     </table>
     
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-<p><input type="submit" value="Delete"></p>
+<p><input class="DeleteButton" type="submit" value="Delete"></p>
  </sec:authorize> 
   </form>
   
@@ -390,6 +464,10 @@ out.println("</form>");
      <sec:authorize access="hasRole('ROLE_ADMIN')">
         <input type="submit" value="Add new">
         </sec:authorize> 
+        
+        <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
+     <a class="search" href="/superadmin/importFromExcel">Import from Excel</a>
+     </sec:authorize> 
         
     </form>
 </div>

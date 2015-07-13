@@ -9,8 +9,8 @@ public class JDBCAccess {
   static final String PASS = "HJab8-r9MxMa";
    
  //  static final String DB_URL = "jdbc:mysql://localhost:3306/mazur";
-  // static final String USER = "root";
-  // static final String PASS = "root";
+ //  static final String USER = "root";
+ //  static final String PASS = "root";
    
    public void updateAttempts(int attemptNum, String name) {
    Connection conn = null;
