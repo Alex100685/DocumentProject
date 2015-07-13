@@ -96,7 +96,7 @@ display:inline
 </head>
 <body>
 <div class="container">
-    <h3>Users List</h3>
+    <h3>Publishers List</h3>
 
 
     
