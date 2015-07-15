@@ -70,7 +70,7 @@ public class MainController {
             return new ModelAndView("login", "errMsg", "Password and confirm password values are not equal!");
         }
 
-        if(actions.getUserByPhone(phone) != null) {
+        if(actions.getUserByPhone(login) != null) {
             return new ModelAndView("login", "errMsg", "Account with entered login is already exists. Please, enter another login!");
         }
         // generate the "salt" value for password encoding
