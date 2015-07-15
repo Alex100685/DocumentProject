@@ -23,6 +23,7 @@
   border-radius: 2px;
   background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
   transition: all .218s ease 0s;
+  cursor: pointer;
 }
 .search:hover {
   color: rgb(24,24,24);
@@ -51,6 +52,7 @@
   border-radius: 2px;
   background: #f7f7f7 linear-gradient(#faa3a3, #ff7070);
   transition: all .218s ease 0s;
+  cursor: pointer;
 }
 
 .DeleteButton:hover {
@@ -75,6 +77,7 @@
   border-radius: 2px;
   background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
   transition: all .218s ease 0s;
+  cursor: pointer;
 }
 
 .ViewButton:hover {
