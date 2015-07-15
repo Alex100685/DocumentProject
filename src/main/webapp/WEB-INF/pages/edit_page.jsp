@@ -79,8 +79,8 @@ select{
     <title>Edit</title>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
-    <a href="javascript:history.back()">Go Back</a>
-    <a href="/client/">To Main</a>
+<a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 </head>
 <body>
 <div class="container">
@@ -138,7 +138,7 @@ select{
             	<a href="/admin/deleteFile?in=${all[1].inventaryNumber}">Delete file</a>   	
         
          <br />
-        <div class="form-group"><input class="search" type="submit" value="Save"></div>
+        <div><button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/save.png"></button></div>
         
         
         
@@ -201,7 +201,7 @@ select{
         <input class="search" type="file" name="file">
     			</label>
         <br />
-        <div class="form-group"><input class="search" type="submit" value="Save"></div>
+        <div><button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/save.png"></button></div>
         
         
         

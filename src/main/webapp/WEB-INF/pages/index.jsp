@@ -5,6 +5,10 @@
 <html>
 <head>
 <style>
+ .image {
+    ​width: 70%;
+    height: 70%;
+}
  a:hover {
       font-weight:bold;
     }
@@ -111,8 +115,9 @@
   .options{
   display: block;
   }
-div#formline *{
-display:inline
+  
+div#formline*{
+display: inline-block;
 }
 
 </style>
@@ -120,29 +125,24 @@ display:inline
     <title>mazurov.company</title>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> --> 
-    <a href="javascript:history.back()">Go Back</a>
-    <a href="/client/">To Main</a>
+    <a href="<c:url value="/j_spring_security_logout"/>"><h4><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/logout.png"></h4></a>
+    <a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 </head>
 <body>
 
 
 <div class="container">
-<a href="<c:url value="/j_spring_security_logout"/>"><h4>Logout</h4></a>
+
     <h3>Documents List</h3>
 
 <div id="formline">
-    
      <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
-       <form class="form-inline" role="form" action="/superadmin/accessManagement" method="post">
-     <input type="submit" class="search" value="Access Management"> 
+       <form action="/superadmin/accessManagement" method="post">
+     <button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/conference.png"></button>
     </form>
-    </sec:authorize>
-    
-    
-    
-     <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
-       <form class="form-inline" role="form" action="/superadmin/uploadFonts" method="post">
-     <input type="submit" class="search" value="Font List"> 
+       <form action="/superadmin/uploadFonts" method="post">
+     <button type="submit" class="search" value="Font List"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/services.png"> </button>
     </form>
     </sec:authorize>
 </div>
@@ -160,15 +160,15 @@ display:inline
         </sec:authorize>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByInvNumb" method="post" style="width: 100px; ">
         
-        <input class="search" type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Number" style="width: 100px; ">
+        <button type="submit" class="search"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/search.png"> </button><input type="text" class="form-control" name="pattern" placeholder="by Number" style="width: 100px; ">
     </form></b></td>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByName" method="post" style="width: 200px; ">
         
-        <input class="search" type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Name" style="width: 200px; ">
+         <button type="submit" class="search"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/search.png"> </button><input type="text" class="form-control" name="pattern" placeholder="by Name" style="width: 200px; ">
     </form></b></td>
             <td align="center"><b><form class="form-inline" role="form" action="/client/searchByPublisher" method="post" style="width: 200px; ">
         
-        <input class="search" type="submit" value="Search"><input type="text" class="form-control" name="pattern" placeholder="by Publisher" style="width: 200px; ">
+        <button type="submit" class="search"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/search.png"> </button><input type="text" class="form-control" name="pattern" placeholder="by Publisher" style="width: 200px; ">
     </form></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
@@ -223,12 +223,12 @@ display:inline
 <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByInvNum")){
 out.println("<form action=\"/client/sortByInvNumRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByInvNum\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -239,12 +239,12 @@ out.println("</form>");
             <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByName")){
 out.println("<form action=\"/client/sortByNameRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByName\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -254,12 +254,12 @@ out.println("</form>");
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublisher")){
 out.println("<form action=\"/client/sortByPublisherRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByPublisher\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>  
@@ -271,12 +271,12 @@ out.println("</form>");
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByPublishDate")){
 out.println("<form action=\"/client/sortByPublishDateRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByPublishDate\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -287,12 +287,12 @@ out.println("</form>");
         <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByStatus")){
 out.println("<form action=\"/client/sortByStatusRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByStatus\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -306,12 +306,12 @@ out.println("</form>");
      <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByDocType")){
 out.println("<form action=\"/client/sortByDocTypeRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByDocType\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -324,12 +324,12 @@ out.println("</form>");
       <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByQuantity")){
 out.println("<form action=\"/client/sortByQuantityRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByQuantity\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -343,12 +343,12 @@ out.println("</form>");
        <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByNote")){
 out.println("<form action=\"/client/sortByNoteRev\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-up-16.png\"></button>");
 out.println("</form>");
 }
 else{
 out.println("<form action=\"/client/sortByNote\" style=\"width: 53px; \">");
-out.println("<button class=\"search\" type=\"submit\">sort</button>");
+out.println("<button class=\"search\" type=\"submit\"><img class=\"image\" src=\"https://cdn0.iconfinder.com/data/icons/glyphpack/26/double-arrow-down-16.png\"></button>");
 out.println("</form>");
 }
 %>
@@ -438,19 +438,19 @@ out.println("</form>");
             	<td align="center" style="width: 200px; ">${document.quantity}</td>
             	
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
-            	<td align="center" style="width: 200px; "><a class="search" href="/admin/edit?in=${document.inventaryNumber}">Edit</a></td>
+            	<td align="center" style="width: 200px; "><a class="search" href="/admin/edit?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/edit_property.png"></a></td>
             	</sec:authorize>
             	
             	<td align="center" style="width: 200px; ">${document.note}</td>
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
             	<td align="center" style="width: 200px; ">
-            	<c:if test="${document.fileName == null}"><a class="search" href="/admin/uploadFile?in=${document.inventaryNumber}">Upload file</a></c:if>
-            	<c:if test="${document.fileName != null}"><a class="search" href="/admin/downloadFile?in=${document.inventaryNumber}">Download file</a></c:if>
+            	<c:if test="${document.fileName == null}"><a class="search" href="/admin/uploadFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/upload.png"></a></c:if>
+            	<c:if test="${document.fileName != null}"><a class="search" href="/admin/downloadFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/download.png"></a></c:if>
             	</td>
             	</sec:authorize> 
             	
             	<td align="center" style="width: 200px; ">
-            	<c:if test="${document.fileName != null}"><a class="search" href="/client/seeFile?in=${document.inventaryNumber}">View</a></c:if>
+            	<c:if test="${document.fileName != null}"><a class="search" href="/client/seeFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/eye-24-24.png"></a></c:if>
             	</td>
             	
                  </tr>
@@ -458,18 +458,18 @@ out.println("</form>");
     </table>
     
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-<p><input class="DeleteButton" type="submit" value="Delete"></p>
+<p><button class="DeleteButton" type="submit" value="Delete"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></button></p>
  </sec:authorize> 
   </form>
   
     <form class="form-inline" role="form" action="/admin/addDocument" method="post">
     
      <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <input type="submit" value="Add new">
+         <button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/add_list.png"></button>
         </sec:authorize> 
         
         <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
-     <a class="search" href="/superadmin/importFromExcel">Import from Excel</a>
+  <a class="search" href="/superadmin/importFromExcel"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/excel.png"></a>
      </sec:authorize> 
         
     </form>

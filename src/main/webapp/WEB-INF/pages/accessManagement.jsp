@@ -90,9 +90,9 @@ display:inline
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<a href="javascript:history.back()">Go Back</a>
-<a href="/client/">To Main</a>
-<title>Insert title here</title>
+<a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
+<title>Access Management</title>
 </head>
 <body>
 <div class="container">
@@ -171,7 +171,7 @@ display:inline
             	 
             	  <td>
             	 
-            <a class="DeleteButton" href="/superadmin/deleteUser?id=${user.id}">Kill</a>
+            <a class="DeleteButton" href="/superadmin/deleteUser?id=${user.id}"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a>
             	
             	 
             	 </td>
@@ -185,7 +185,7 @@ display:inline
     
   
     
-        <input class="search" type="submit" value="Save">  
+        <button class="search" type="submit"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/save.png"></button>  
     </form>
 </div>
 </body>

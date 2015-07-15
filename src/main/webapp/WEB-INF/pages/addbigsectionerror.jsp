@@ -39,8 +39,8 @@ a:hover {
     <title>New</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <a href="javascript:history.back()">Go Back</a>
-    <a href="/client/">To Main</a>
+<a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 </head>
 <body>
 <div class="container">
@@ -50,7 +50,7 @@ a:hover {
 
 <div class="form-group"><input type="text" class="form-control" name="id" placeholder="Number of Big Section" style="width: 326px; "></div>
         <div class="form-group"><input type="text" class="form-control" name="name" required="required" pattern=".{1,}" title="Must be not empty" placeholder="Name of Big Section" style="width: 326px; "></div>
-        <div class="search"><input type="submit" value="Add"></div>
+        <div><button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/save.png"></button></div>
     </form>
 </div>
 </body>

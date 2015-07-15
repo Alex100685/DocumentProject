@@ -90,8 +90,8 @@ display:inline
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<a href="javascript:history.back()">Go Back</a>
- <a href="/client/">To Main</a>
+<a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 <h4>${all[1]}</h4>
 <title>Fonts</title>
 </head>
@@ -124,7 +124,7 @@ display:inline
             	<td>${fl.name}</td>
             	
             	 <td>
-            	 <a class="DeleteButton" href="/superadmin/deleteFont?id=${fl.id}">Delete</a>
+            	 <a class="DeleteButton" href="/superadmin/deleteFont?id=${fl.id}"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a>
             	 </td>
             	 
             	
@@ -133,9 +133,9 @@ display:inline
     </table>
     
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/superadmin/saveFont" method="post">
-        <div class="form-group"><h5>Upload font</h5></div>
-        <div class="form-group">File: <input type="file" name="file"></div>
-        <div class="search"><input type="submit" value="Add"></div>
+        <div><h5>Upload font</h5></div>
+        <div class="search">File: <input type="file" name="file"></div>
+        <div><input class="search" type="submit" value="Add"></div>
     </form>
     
   

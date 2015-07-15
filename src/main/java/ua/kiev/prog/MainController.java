@@ -28,6 +28,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,9 +100,12 @@ public class MainController {
 	
 	@RequestMapping("/admin/deleteDocuments")
 	public ModelAndView deleteDocuments(
-			@RequestParam(value="id []") String [] id
+			@RequestParam(value="id []", required=false) String [] id
 			) 
 	{
+		if(id == null){
+			return new ModelAndView("errorPage", "note", "Вы не выбрали ни одного документа для удаления!");
+		}
 			actions.deleteDocByInvNum(id);
 			List <BigSection> bsList = actions.BigSectionList(); 
 			return new ModelAndView("main", "bs", bsList);	
@@ -354,7 +358,18 @@ public class MainController {
 	public ModelAndView chooseSmallSection(
 			@RequestParam(value="SelectBigSection") String name
 			) {
-		return new ModelAndView("choosesmallsection", "Sections", actions.smallSectionList(name));
+		if(actions.smallSectionList(name).size() == 0){
+			List <Section> sList = new ArrayList<>();
+			Section s = new Section();
+			s.setId("");
+			s.setName("");
+			sList.add(s);
+			return new ModelAndView("choosesmallsection", "Sections", sList);
+		}
+		List <Object> all = new ArrayList<>();
+		all.add(actions.smallSectionList(name));
+		all.add(name);
+		return new ModelAndView("choosesmallsection", "all", all);
 	}
 	
 	
@@ -363,13 +378,17 @@ public class MainController {
 	@RequestMapping("/admin/addBigSection")
 	public ModelAndView addBigSection(Model model) {
 		List <BigSection> sList = actions.BigSectionList();
-		int i;
-		for(i=0;i<sList.size(); i++){
-			if(!String.valueOf(i+1).equals(sList.get(i).getId())){
-				break;
-			}			
+		List <Integer> iList = new ArrayList<>();
+		for(BigSection s: sList){
+			iList.add(Integer.parseInt(s.getId()));	
 		}
-		return new ModelAndView ("addbigsection", "id", (i+1));
+		int i=1;
+		for(; i<(iList.size()+2); i++){
+			if(!iList.contains(i)){
+				break;
+			}
+		}
+		return new ModelAndView ("addbigsection", "id", (i));
 	}
 	
 	
@@ -380,8 +399,6 @@ public class MainController {
 	
 	@RequestMapping("/admin/addSmallSection")
 	public ModelAndView addSmallSection(Model model) {
-		
-		
 		return new ModelAndView ("addsmallsection", "BigSection", actions.BigSectionList());
 	}
 	
@@ -420,13 +437,21 @@ public class MainController {
 		
 		List <Section> list = actions.smallSectionList(upperSection);
 		if("".equals(id)){
-			int i;
+			int i=0;
+			for(Section s: list){
+				String [] invPart = s.getId().split("\\.");
+				if(Integer.parseInt(invPart[1])>=i){
+					i=Integer.parseInt(invPart[1]);
+					i++;
+				}
+			}
+			
 			for(i=0;i<list.size(); i++){
 				if(!(list.get(i).getId()).contains("."+String.valueOf(i+1))){
 					break;
 				}			
 			}
-			id = String.valueOf(i+1);
+			id = String.valueOf(i);
 		}
 		for(Section s : list){
 			if(s.getId().equals(id) || s.getName().equals(name)){
@@ -447,25 +472,37 @@ public class MainController {
 	
 	@RequestMapping(value = "/admin/toDocumentData", method = RequestMethod.POST)
 	public ModelAndView toDocumentData(
-			@RequestParam(value="smallSection") String sectionName
+			@RequestParam(value="smallSection") String sectionName,
+			@RequestParam(value="bigSection") String bigSectionName
 			)
 	{
+		if(sectionName.equals("")){
+			return new ModelAndView("errorPage", "note", "В данном разделе нет подразделов, создайте сначала подраздел!");
+		}
 		List <Publisher> pList = actions.PublisherList();
 		List <Receiver> rList = actions.ReceiverList();
-		Section s = actions.getSectionByName(sectionName);
-		
+		BigSection b = actions.getBigSectionByName(bigSectionName);
+		List <Section> sList = b.getSections();
+		Section s = null;
+		for(Section s1: sList){
+			if(s1.getName().equals(sectionName)){
+				s = s1;
+			}
+		}
 		List <Document> dList = s.getDocuments();
-		int i;
-		for(i=0;i<dList.size(); i++){
-			if(!(dList.get(i).getInventaryNumber()).endsWith("."+String.valueOf(i+1))){
-				break;
-			}			
+		int i=1;
+		for(Document d: dList){
+			String [] invPart = d.getInventaryNumber().split("\\.");
+			if(Integer.parseInt(invPart[2])>=i){
+				i=Integer.parseInt(invPart[2]);
+				i++;
+			}
 		}
 		
 		List <Object> all = new ArrayList<>();
 		all.add(pList);
 		all.add(s);
-		all.add(i+1);
+		all.add(i);
 		all.add(rList);
 		
 				return new ModelAndView ("add_page", "all", all);
@@ -581,16 +618,23 @@ public class MainController {
 			
 			Document doc = new Document();
 			Section s = actions.getSectionByName(sectionName);
-			
+			List <Document> dList = s.getDocuments();
 			if("".equals(inventaryNumber)){
-				List <Document> dList = s.getDocuments();
-				int i;
-				for(i=0;i<dList.size(); i++){
-					if(!(dList.get(i).getInventaryNumber()).endsWith("."+String.valueOf(i+1))){
-						break;
-					}			
+				
+				int i=0;
+				for(Document d: dList){
+					String [] invPart = d.getInventaryNumber().split("\\.");
+					if(Integer.parseInt(invPart[2])>=i){
+						i=Integer.parseInt(invPart[2]);
+						i++;
+					}
 				}
-				inventaryNumber = String.valueOf(i+1);
+				inventaryNumber = String.valueOf(i);
+			}
+			for(Document d: dList){
+				if((s.getId()+"."+inventaryNumber).equals(d.getInventaryNumber())){
+					return new ModelAndView("errorPage", "note", "Указанный Вами номер документа уже существует!");
+				}
 			}
 			doc.setSection(s);
 			doc.setInventaryNumber(s.getId()+"."+inventaryNumber);

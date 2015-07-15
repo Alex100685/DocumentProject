@@ -35,10 +35,13 @@ a:hover {
   background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
   box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
 }
+.hidden {
+    display: none;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<a href="javascript:history.back()">Go Back</a>
-<a href="/client/">To Main</a>
+<a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 <title>Choose a small Section</title>
 </head>
 <body>
@@ -47,17 +50,19 @@ a:hover {
 <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/admin/toDocumentData" method="post">
 <div>
 <select class="form-group" name="smallSection" style="width: 401px; height: 32px">
-<c:forEach items="${Sections}" var="Section">
+<c:forEach items="${all[0]}" var="Section">
 <option>${Section.name}</option>
 </c:forEach>
 </select>
 </div>
 
+<input class="hidden" type="text" name="bigSection" value="${all[1]}">
 
-<p><input class="search" type="submit" value="Choose"></p>
+
+<p><button class="search" type="submit"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/checkmark.png"></button></p>
 </form>
 
-<a href="/admin/addSmallSection">Create a new small section</a>
+<a class="search" href="/admin/addSmallSection"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/add_list.png"></a>
 
 </body>
 </html>
