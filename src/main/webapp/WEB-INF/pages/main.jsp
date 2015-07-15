@@ -96,6 +96,7 @@
   th {
     background-color: rgb(112,196,105);
     color: white;
+    position: fixed;
     font-weight: normal;
     padding: 5px 20px;
     text-align: center;
