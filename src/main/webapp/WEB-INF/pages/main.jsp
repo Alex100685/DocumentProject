@@ -217,9 +217,9 @@ display: inline-block;
         <thead>
         <tr>    
             
-            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "></td>
-            
+            </sec:authorize>
 			<td align="center" style="width: 200px; ">
 <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByInvNum")){
@@ -339,7 +339,7 @@ out.println("</form>");
             <td align="center" style="width: 200px; "></td>
             
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            
             <td align="center" style="width: 200px; ">
        <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByNote")){
@@ -354,6 +354,8 @@ out.println("</form>");
 }
 %>
             </td>
+            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             
             <td align="center" style="width: 200px; "></td>
             <td align="center" style="width: 200px; "></td>
@@ -431,9 +433,11 @@ out.println("</form>");
             	
             <c:forEach items="${bs}" var="bigSection">
             <thead>
-            <tr>	 
+            <tr>	
+            <sec:authorize access="hasRole('ROLE_ADMIN')"> 
             <td align="center" style="width: 200px; "><b></b>
           				</td>  
+          				</sec:authorize> 
 			<td align="left" style="width: 200px; color:black "><b><h3>${bigSection.id}</h3></b>
             				</td>
 			<td align="center" style="width: 200px; color:black "><b><h3>${bigSection.name}</h3></b>
@@ -460,9 +464,10 @@ out.println("</form>");
             	 <c:forEach items="${bigSection.sections}" var="sect">
             	 <thead>
             	 <tr>
-            	 
+            	<sec:authorize access="hasRole('ROLE_ADMIN')"> 
            	<td align="center" style="width: 200px; "><b></b>
-          				</td>  
+          				</td> 
+ 				</sec:authorize>
 			<td align="center" style="width: 200px; color:black"><b><h4>${sect.id}</h4></b>
             				</td>
 			<td align="center" style="width: 200px; color:black"><b><h4>${sect.name}</h4></b>
