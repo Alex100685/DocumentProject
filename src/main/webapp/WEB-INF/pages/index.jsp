@@ -125,9 +125,9 @@ display: inline-block;
     <title>mazurov.company</title>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> --> 
-    <a href="<c:url value="/j_spring_security_logout"/>"><h4><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/logout.png"></h4></a>
-    <a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
-    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
+    <a title="Exit" href="<c:url value="/j_spring_security_logout"/>"><h4><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/logout.png"></h4></a>
+    <a title="Go back" href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a title="Home" href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 </head>
 <body>
 
@@ -139,10 +139,10 @@ display: inline-block;
 <div id="formline">
      <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
        <form action="/superadmin/accessManagement" method="post">
-     <button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/conference.png"></button>
+     <button title="users access management" type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/conference.png"></button>
     </form>
        <form action="/superadmin/uploadFonts" method="post">
-     <button type="submit" class="search" value="Font List"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/services.png"> </button>
+     <button title="font management" type="submit" class="search" value="Font List"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/services.png"> </button>
     </form>
     </sec:authorize>
 </div>
@@ -375,9 +375,9 @@ out.println("</form>");
         
 <td align="center" style="width: 200px; ">
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<a href="/admin/addPublisherFromMain">add</a>
+<a title="add new publishers" href="/admin/addPublisherFromMain">add</a>
 |
-<a href="/admin/deletePublisherFromMain">delete</a>
+<a title="delete publishers" href="/admin/deletePublisherFromMain">delete</a>
 </sec:authorize>  
             </td>
             
@@ -389,9 +389,9 @@ out.println("</form>");
             
             <td align="center" style="width: 200px; ">
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<a href="/admin/addReceiverFromMain">add</a>
+<a title="add new receivers" href="/admin/addReceiverFromMain">add</a>
 |
-<a href="/admin/deleteReceiverFromMain">delete</a>
+<a title="delete receivers" href="/admin/deleteReceiverFromMain">delete</a>
 </sec:authorize> 
             </td>
             
@@ -438,19 +438,19 @@ out.println("</form>");
             	<td align="center" style="width: 200px; ">${document.quantity}</td>
             	
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
-            	<td align="center" style="width: 200px; "><a class="search" href="/admin/edit?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/edit_property.png"></a></td>
+            	<td align="center" style="width: 200px; "><a class="search" title="edit document" href="/admin/edit?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/edit_property.png"></a></td>
             	</sec:authorize>
             	
             	<td align="center" style="width: 200px; ">${document.note}</td>
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
             	<td align="center" style="width: 200px; ">
-            	<c:if test="${document.fileName == null}"><a class="search" href="/admin/uploadFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/upload.png"></a></c:if>
-            	<c:if test="${document.fileName != null}"><a class="search" href="/admin/downloadFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/download.png"></a></c:if>
+            	<c:if test="${document.fileName == null}"><a class="search" title="upload file" href="/admin/uploadFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/upload.png"></a></c:if>
+            	<c:if test="${document.fileName != null}"><a class="search" title="download file" href="/admin/downloadFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/download.png"></a></c:if>
             	</td>
             	</sec:authorize> 
             	
             	<td align="center" style="width: 200px; ">
-            	<c:if test="${document.fileName != null}"><a class="search" href="/client/seeFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/eye-24-24.png"></a></c:if>
+            	<c:if test="${document.fileName != null}"><a class="search" title="view document as PDF" href="/client/seeFile?in=${document.inventaryNumber}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/eye-24-24.png"></a></c:if>
             	</td>
             	
                  </tr>
@@ -458,18 +458,18 @@ out.println("</form>");
     </table>
     
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-<p><button class="DeleteButton" type="submit" value="Delete"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></button></p>
+<p><button class="DeleteButton" title="delete selected" type="submit" value="Delete"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></button></p>
  </sec:authorize> 
   </form>
   
     <form class="form-inline" role="form" action="/admin/addDocument" method="post">
     
      <sec:authorize access="hasRole('ROLE_ADMIN')">
-         <button type="submit" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/add_list.png"></button>
+         <button type="submit" title="add new document" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/add_list.png"></button>
         </sec:authorize> 
         
         <sec:authorize access="hasRole('ROLE_SUPERADMIN')">
-  <a class="search" href="/superadmin/importFromExcel"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/excel.png"></a>
+  <a class="search" title="import documents from excel" href="/superadmin/importFromExcel"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/excel.png"></a>
      </sec:authorize> 
         
     </form>

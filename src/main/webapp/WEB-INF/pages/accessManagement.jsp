@@ -90,8 +90,8 @@ display:inline
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<a href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
-    <a href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
+<a title="Go back" href="javascript:history.back()"><img src="https://cdn1.iconfinder.com/data/icons/free-98-icons/32/back-24.png"></a>
+    <a title="Home" href="/client/"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/home.png"></a>
 <title>Access Management</title>
 </head>
 <body>
@@ -171,7 +171,7 @@ display:inline
             	 
             	  <td>
             	 
-            <a class="DeleteButton" href="/superadmin/deleteUser?id=${user.id}"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a>
+            <a class="DeleteButton" title="delete user" href="/superadmin/deleteUser?id=${user.id}"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a>
             	
             	 
             	 </td>
@@ -185,7 +185,7 @@ display:inline
     
   
     
-        <button class="search" type="submit"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/save.png"></button>  
+        <button class="search" title="save" type="submit"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/save.png"></button>  
     </form>
 </div>
 </body>
