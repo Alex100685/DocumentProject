@@ -446,10 +446,11 @@ out.println("</form>");
             				</td>
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
-            		</td>
-            		 <sec:authorize access="hasRole('ROLE_ADMIN')">
+            		
+            		 
             <td align="center" style="width: 200px; color:red "><a class="DeleteButton" title="delete big section" href="/admin/deleteBigSection?id=${bigSection.id}"><img  class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a></td> 
             </sec:authorize> 
             <td align="center" style="width: 200px; "><b></b></td>
@@ -474,9 +475,10 @@ out.println("</form>");
             				</td>
             <td align="center" style="width: 200px; "><b></b></td>
              <td align="center" style="width: 200px; "><b></b></td>
+             <sec:authorize access="hasRole('ROLE_ADMIN')">
               <td align="center" style="width: 200px; "><b></b></td>
                <td align="center" style="width: 200px; "><b></b></td>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                
             <td align="center" style="width: 200px; "><a class="DeleteButton" title="delete section" href="/admin/deleteSection?id=${sect.id}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a>
             		</td>
             		</sec:authorize> 
