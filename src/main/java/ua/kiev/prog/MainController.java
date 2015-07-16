@@ -436,27 +436,23 @@ public class MainController {
 			) {
 		
 		List <Section> list = actions.smallSectionList(upperSection);
+		List <Integer> iList = new ArrayList<>();
 		if("".equals(id)){
-			int i=0;
+			int i=1;
 			for(Section s: list){
 				String [] invPart = s.getId().split("\\.");
-				if(Integer.parseInt(invPart[1])>=i){
-					i=Integer.parseInt(invPart[1]);
-					i++;
-				}
+				iList.add(Integer.parseInt(invPart[1]));	
 			}
-			
-			for(i=0;i<list.size(); i++){
-				if(!(list.get(i).getId()).contains("."+String.valueOf(i+1))){
+			for(; i<(iList.size()+2); i++){
+				if(!iList.contains(i)){
 					break;
-				}			
+				}
 			}
 			id = String.valueOf(i);
 		}
 		for(Section s : list){
 			if(s.getId().equals(id) || s.getName().equals(name)){
-				return new ModelAndView("addsmallsectionerror");
-				
+				return new ModelAndView("addsmallsectionerror");	
 			}
 		}
 		BigSection bs = actions.getBigSectionByName(upperSection);
@@ -464,8 +460,7 @@ public class MainController {
 		s.setName(name);
 		s.setId(bs.getId()+"."+id);
 		s.setBigSection(bs);
-		actions.add(bs);
-		
+		actions.add(bs);	
 		return new ModelAndView("choosebigsection", "bigSections", actions.BigSectionList());	
 	}
 
@@ -490,21 +485,22 @@ public class MainController {
 			}
 		}
 		List <Document> dList = s.getDocuments();
+		List <Integer> iList = new ArrayList<>();
 		int i=1;
 		for(Document d: dList){
-			String [] invPart = d.getInventaryNumber().split("\\.");
-			if(Integer.parseInt(invPart[2])>=i){
-				i=Integer.parseInt(invPart[2]);
-				i++;
+			String [] invPart = s.getId().split("\\.");
+			iList.add(Integer.parseInt(invPart[2]));	
+		}
+		for(; i<(iList.size()+2); i++){
+			if(!iList.contains(i)){
+				break;
 			}
 		}
-		
 		List <Object> all = new ArrayList<>();
 		all.add(pList);
 		all.add(s);
 		all.add(i);
 		all.add(rList);
-		
 				return new ModelAndView ("add_page", "all", all);
 	}
 	
