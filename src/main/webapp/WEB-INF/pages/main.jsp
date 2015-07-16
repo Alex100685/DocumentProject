@@ -175,9 +175,10 @@ display: inline-block;
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b></td>
             
+            
+            <td align="center" style="width: 200px; "><b></b></td>
+            <td align="center" style="width: 200px; "><b></b></td>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td align="center" style="width: 200px; "><b></b></td>
-            <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px;"><b></b></td>
             <td align="center" style="width: 200px;"><b></b></td>
             </sec:authorize>
@@ -338,7 +339,7 @@ out.println("</form>");
             <td align="center" style="width: 200px; "></td>
             
             
-            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; ">
        <% 
 if(request.getAttribute("javax.servlet.forward.servlet_path").toString().endsWith("/client/sortByNote")){
@@ -356,6 +357,8 @@ out.println("</form>");
             
             <td align="center" style="width: 200px; "></td>
             <td align="center" style="width: 200px; "></td>
+            
+            </sec:authorize> 
             
             
             
@@ -410,13 +413,13 @@ out.println("</form>");
             <td align="center" style="width: 200px; "></td>
             
             
-            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; ">
             </td>
             
             <td align="center" style="width: 200px; "></td>
             <td align="center" style="width: 200px; "></td>
-            
+            </sec:authorize>
             
             
         </tr>
