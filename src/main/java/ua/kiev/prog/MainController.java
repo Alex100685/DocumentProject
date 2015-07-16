@@ -467,10 +467,13 @@ public class MainController {
 	
 	@RequestMapping(value = "/admin/toDocumentData", method = RequestMethod.POST)
 	public ModelAndView toDocumentData(
-			@RequestParam(value="smallSection") String sectionName,
+			@RequestParam(value="smallSection", required = false) String sectionName,
 			@RequestParam(value="bigSection") String bigSectionName
 			)
 	{
+		if(sectionName==null){
+			return new ModelAndView("errorPage", "note", "В данном разделе нет подразделов, создайте сначала подраздел!");
+		}
 		if(sectionName.equals("")){
 			return new ModelAndView("errorPage", "note", "В данном разделе нет подразделов, создайте сначала подраздел!");
 		}
