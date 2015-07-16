@@ -335,9 +335,9 @@ out.println("</form>");
 }
 %>
             </td>
-            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "></td>
-            
+            </sec:authorize> 
             
             
             <td align="center" style="width: 200px; ">
@@ -355,9 +355,10 @@ out.println("</form>");
 %>
             </td>
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            
             
             <td align="center" style="width: 200px; "></td>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "></td>
             
             </sec:authorize> 
@@ -367,6 +368,7 @@ out.println("</form>");
         </tr>
        <h1> </thead>
        
+       <sec:authorize access="hasRole('ROLE_ADMIN')">
        <thead>
         <tr>    
             
@@ -379,11 +381,11 @@ out.println("</form>");
           </td>  
         
 <td align="center" style="width: 200px; ">
-<sec:authorize access="hasRole('ROLE_ADMIN')">
+
 <a title="add publishers" href="/admin/addPublisherFromMain">add</a>
 |
 <a title="delete publishers" href="/admin/deletePublisherFromMain">delete</a>
-</sec:authorize>  
+  
             </td>
             
          
@@ -393,11 +395,10 @@ out.println("</form>");
             
             
             <td align="center" style="width: 200px; ">
-<sec:authorize access="hasRole('ROLE_ADMIN')">
 <a title="add receivers" href="/admin/addReceiverFromMain">add</a>
 |
 <a title="delete receivers" href="/admin/deleteReceiverFromMain">delete</a>
-</sec:authorize> 
+
             </td>
             
             
@@ -415,17 +416,18 @@ out.println("</form>");
             <td align="center" style="width: 200px; "></td>
             
             
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            
             <td align="center" style="width: 200px; ">
             </td>
             
             <td align="center" style="width: 200px; "></td>
             <td align="center" style="width: 200px; "></td>
-            </sec:authorize>
+            
             
             
         </tr>
        <h1> </thead>
+       </sec:authorize> 
         
          <sec:authorize access="hasRole('ROLE_ADMIN')">
         <form method="post" action="/admin/deleteDocuments">
@@ -450,8 +452,9 @@ out.println("</form>");
             				</td>
             <td align="center" style="width: 200px; "><b></b></td>
             <td align="center" style="width: 200px; "><b></b>
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            
             <td align="center" style="width: 200px; "><b></b></td>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "><b></b></td>
             		
             		 
@@ -480,8 +483,9 @@ out.println("</form>");
             				</td>
             <td align="center" style="width: 200px; "><b></b></td>
              <td align="center" style="width: 200px; "><b></b></td>
-             <sec:authorize access="hasRole('ROLE_ADMIN')">
+             
               <td align="center" style="width: 200px; "><b></b></td>
+              <sec:authorize access="hasRole('ROLE_ADMIN')">
                <td align="center" style="width: 200px; "><b></b></td>
                 
             <td align="center" style="width: 200px; "><a class="DeleteButton" title="delete section" href="/admin/deleteSection?id=${sect.id}"><img class="image" src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/trash.png"></a>
