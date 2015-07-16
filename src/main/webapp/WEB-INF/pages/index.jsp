@@ -353,8 +353,9 @@ out.println("</form>");
 }
 %>
             </td>
-            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <td align="center" style="width: 200px; "></td>
+            </sec:authorize> 
             <td align="center" style="width: 200px; "></td>
             
             
