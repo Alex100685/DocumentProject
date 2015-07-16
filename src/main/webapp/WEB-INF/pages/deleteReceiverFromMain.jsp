@@ -96,7 +96,7 @@ display:inline
 </head>
 <body>
 <div class="container">
-    <h3>Users List</h3>
+    <h3>Receivers List</h3>
 
 
     <table class="table table-striped">
