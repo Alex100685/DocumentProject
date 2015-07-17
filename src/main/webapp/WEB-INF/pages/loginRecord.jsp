@@ -97,7 +97,7 @@ display:inline
 
 <div>
     <form class="form-inline" action="/superadmin/showLogins" method="post" style="width: 100px; ">
-    <button type="submit" class="search">Show rows:</button><input type="text" class="form-control" name="pattern" pattern = "[0-9]{1,3}$" title="Must contain only numbers from 1 to 999" placeholder="number of rows" style="width: 100px; ">
+    <button type="submit" class="search">Show rows:</button><input type="text" class="form-control" name="pattern" pattern = "[0-9]{1,3}$" title="Must contain only numbers from 1 to 999" required = "required" placeholder="number of rows" style="width: 100px; ">
 	</form>
 </div>
 
