@@ -12,6 +12,8 @@
     ​width: 70%;
     height: 70%;
 }
+
+
     
  .search {
   display: inline-block;
@@ -119,6 +121,10 @@
 div#formline*{
 display: inline-block;
 }
+#but{ 
+	width: 105%;
+    height: 105%;
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -146,7 +152,7 @@ display: inline-block;
      <button title="font management" type="submit" class="search" value="Font List"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/services.png"> </button>
     </form>
      <form action="/superadmin/loginRecord" method="post">
-     <button title="log in history" type="submit" class="search"><img src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/key-24.png"></button>
+     <button id="but" title="log in history" type="submit" class="search"><img src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/key-24.png"></button>
     </form>
     
     </sec:authorize>
