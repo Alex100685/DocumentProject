@@ -112,8 +112,7 @@ public class MainController {
 	public ModelAndView showLogins(
 			@RequestParam(value="pattern", required=false) int pattern
 			) {
-		Integer pat = pattern;
-		if(pat == null){
+		if(pattern == 0){
 			return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(10));
 		}
 		return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(pattern));
