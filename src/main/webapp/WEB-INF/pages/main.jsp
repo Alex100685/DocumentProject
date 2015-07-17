@@ -123,7 +123,6 @@ display: inline-block;
 }
 .but{ 
 	width: 108%;
-    height: 108%;
 }
 
 </style>
