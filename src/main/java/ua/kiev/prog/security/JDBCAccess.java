@@ -1,6 +1,10 @@
 package ua.kiev.prog.security;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+
+import ua.kiev.prog.LoginRecord;
+import ua.kiev.prog.User;
 
 public class JDBCAccess {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -60,6 +64,31 @@ public class JDBCAccess {
 	      conn.close(); 
 	return attempts;  
    }
+   
+   public LoginRecord getLoginRecordByUserName(String name) throws ClassNotFoundException, SQLException{
+	   Connection conn = null;
+	   PreparedStatement stmt = null;
+	   Class.forName("com.mysql.jdbc.Driver");
+	   conn = DriverManager.getConnection(DB_URL,USER,PASS);
+	   String sql = "SELECT id FROM users WHERE login = '"+name+"'";
+	   stmt = conn.prepareStatement(sql);
+	   ResultSet rs = stmt.executeQuery(sql);
+	   LoginRecord lr = new LoginRecord();
+	   lr.setUserName(name);
+	   SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z");
+	   lr.setDate(sdf.format(new java.util.Date()));
+	   while(rs.next()){
+		   lr.setUserId(rs.getString("id"));
+	   }
+	   	rs.close();
+	      stmt.close();
+	      conn.close(); 
+	return lr;  
+   }
+   
+   
+   
+   
    
    public String getEmailByName(String name) throws ClassNotFoundException, SQLException{
 	   Connection conn = null;
@@ -162,6 +191,55 @@ public class JDBCAccess {
 	      conn.close(); 
 	return authorized;
    }
+
+public void addNewLoginRecord(LoginRecord lr) {
+	Connection conn = null;
+	   PreparedStatement stmt = null;
+	   try{
+	      Class.forName("com.mysql.jdbc.Driver");
+	      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+	      String sql = "INSERT INTO login_records (date, user_name, user_id) VALUES ('"+lr.getDate()+"', '"+lr.getUserName()+"', '"+lr.getUserId()+"')";
+	      stmt = conn.prepareStatement(sql);
+	      stmt.executeUpdate();  
+	      stmt.close();
+	      conn.close();
+	   }catch(SQLException se){
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      e.printStackTrace();
+	   }finally{
+	      try{
+	         if(stmt!=null)
+	            stmt.close();
+	      }catch(SQLException se2){
+	      }
+	      try{
+	         if(conn!=null)
+	            conn.close();
+	      }catch(SQLException se){
+	         se.printStackTrace();
+	      }
+	   }
+	
+}
+
+public String getLastRecordDateByName(String name) throws ClassNotFoundException, SQLException {
+	Connection conn = null;
+	   PreparedStatement stmt = null;
+	   Class.forName("com.mysql.jdbc.Driver");
+	   conn = DriverManager.getConnection(DB_URL,USER,PASS);
+	   String sql = "SELECT date FROM login_records where user_name = '"+name+"' ORDER BY id DESC LIMIT 1";
+	   stmt = conn.prepareStatement(sql);
+	   ResultSet rs = stmt.executeQuery(sql);
+	   String date = null;
+	   while(rs.next()){
+		   date  = rs.getString("date");
+	   }
+	   	rs.close();
+	      stmt.close();
+	      conn.close(); 
+	return date;
+}
    
    
    

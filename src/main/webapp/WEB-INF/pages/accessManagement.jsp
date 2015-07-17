@@ -114,6 +114,8 @@ display:inline
         	
             <th style="width: 210px; "><b>Login</b></th>
             
+            <th style="width: 210px; "><b>Registration Date</b></th>
+            
             <th style="width: 210px; "><b>Access Level</b></th>
             
             <th style="width: 150px; "><b>Authorized</b></th>
@@ -127,6 +129,9 @@ display:inline
             <tr>
             <%out.println("<td>"+i+"</td>");%>
             	<td>${user.username}</td>
+            	
+            	<td>${user.registrationDate}</td>
+            	
             	<td>
             	<c:if test="${user.group.name == 'Admins'}">
             	<select name="access" id="access">
@@ -168,6 +173,7 @@ display:inline
 				</select></c:if>
             	 
             	 </td>
+            	 
             	 
             	  <td>
             	 

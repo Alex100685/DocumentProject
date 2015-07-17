@@ -571,4 +571,27 @@ public class ActionsImpl implements Actions {
 				e.printStackTrace();
 			}
 	}
+	@Override
+	public List <LoginRecord> getLoginRecordListLim(int limit) {
+		try{
+		List <LoginRecord> list = new ArrayList<>();
+		Query query = entityManager.createQuery("SELECT l FROM LoginRecord l order by l.id desc", LoginRecord.class);
+		list = query.setMaxResults(limit).getResultList();
+		return list;
+	} catch(NoResultException e) {
+        return null;
+    }
+	}
+
+	@Override
+	public void deleteLoginHistory(LoginRecord lr) {
+		try{
+		entityManager.getTransaction().begin();
+		entityManager.remove(lr);
+		entityManager.getTransaction().commit();
+		}catch(Exception e){
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
 }

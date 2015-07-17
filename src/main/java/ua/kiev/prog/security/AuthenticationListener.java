@@ -23,6 +23,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import ua.kiev.prog.Actions;
+import ua.kiev.prog.LoginRecord;
 import ua.kiev.prog.User;
 
 @Service
@@ -39,7 +40,16 @@ public class AuthenticationListener implements ApplicationListener <AbstractAuth
                 UserDetails userDetails = (UserDetails) event.getAuthentication().getPrincipal();
                 String userName = userDetails.getUsername();
                 access = new JDBCAccess();
-                access.updateAttempts(0, userName);
+                access.updateAttempts(0, userName); 
+                try {
+					LoginRecord lr = access.getLoginRecordByUserName(userName);
+					String lastRecordDate = access.getLastRecordDateByName(userName);
+							if(lastRecordDate==null || !(lastRecordDate.substring(0, 19)).equals(lr.getDate().substring(0, 19)))
+					access.addNewLoginRecord(lr);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+                
             }
 
             if (appEvent instanceof AuthenticationFailureBadCredentialsEvent)

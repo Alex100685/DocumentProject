@@ -53,6 +53,8 @@ public interface Actions {
 	public void add(Fonts f);
 	public Fonts getFontById(int id);
 	public void deleteFont(Fonts f);
+	public List<LoginRecord> getLoginRecordListLim(int limit);
+	public void deleteLoginHistory(LoginRecord lr);
 	
 
 }

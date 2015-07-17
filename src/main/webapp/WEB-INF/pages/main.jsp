@@ -145,6 +145,10 @@ display: inline-block;
        <form action="/superadmin/uploadFonts" method="post">
      <button title="font management" type="submit" class="search" value="Font List"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/services.png"> </button>
     </form>
+     <form action="/superadmin/loginRecord" method="post">
+     <button title="log in history" type="submit" class="search"><img src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/key-24.png"></button>
+    </form>
+    
     </sec:authorize>
   
 </div>
@@ -545,7 +549,7 @@ out.println("</form>");
 
   </form>
   
-    <form role="form" action="/admin/addDocument" method="post">
+    <form action="/admin/addDocument" method="post">
     
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <button type="submit" title="add new document" class="search"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/26/add_list.png"></button>

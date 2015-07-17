@@ -79,8 +79,12 @@ public class MainController {
         String salt = DatatypeConverter.printHexBinary(saltBytes);
         // creating password for smf database
         password = passwordEncoder.encodePassword(password, salt);
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z");
+        String strDate = sdf.format(date);
         User user = new User();
         user.setUsername(login);
+        user.setRegistrationDate(strDate);
         user.setPhone(phone);
         user.setEmail(email);
         user.setPassword(password);
@@ -96,6 +100,21 @@ public class MainController {
 	public ModelAndView listDocs() {		
 		List <BigSection> bsList = actions.BigSectionList(); 
 		return new ModelAndView("main", "bs", bsList);
+	}
+	
+	@RequestMapping("/superadmin/loginRecord")
+	public ModelAndView loginRecordList() {		
+		List <LoginRecord> lrList = actions.getLoginRecordListLim(10);
+		return new ModelAndView("loginRecord", "loginRecords", lrList);
+	}
+	
+	@RequestMapping("/superadmin/deleteLoginHistory")
+	public ModelAndView deleteLoginHistory() {
+		List <LoginRecord> lrList = actions.getLoginRecordListLim(100000);
+		for(int i=0; i<lrList.size(); i++){
+			actions.deleteLoginHistory(lrList.get(i));
+		}
+		return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(10));
 	}
 	
 	@RequestMapping("/admin/deleteDocuments")

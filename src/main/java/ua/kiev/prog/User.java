@@ -47,6 +47,17 @@ import javax.persistence.Table;
 	    
 	    @Column(name="authorized")
 	    private boolean authorized;
+	    
+	    @Column(name="registration_date", nullable = true)
+	    private String registrationDate;
+
+		public String getRegistrationDate() {
+			return registrationDate;
+		}
+
+		public void setRegistrationDate(String registrationDate) {
+			this.registrationDate = registrationDate;
+		}
 
 		public Integer getLoginAttempts() {
 			return loginAttempts;
