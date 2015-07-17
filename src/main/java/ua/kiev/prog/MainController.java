@@ -108,6 +108,14 @@ public class MainController {
 		return new ModelAndView("loginRecord", "loginRecords", lrList);
 	}
 	
+	@RequestMapping("/superadmin/showLogins")
+	public ModelAndView showLogins(
+			@RequestParam(value="pattern", required=false) int pattern
+			) {
+		
+		return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(pattern));
+	}
+	
 	@RequestMapping("/superadmin/deleteLoginHistory")
 	public ModelAndView deleteLoginHistory() {
 		List <LoginRecord> lrList = actions.getLoginRecordListLim(100000);
