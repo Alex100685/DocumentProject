@@ -122,8 +122,8 @@ div#formline*{
 display: inline-block;
 }
 #but{ 
-	width: 105%;
-    height: 105%;
+	width: 26px;
+    height: 26px;
 }
 
 </style>
