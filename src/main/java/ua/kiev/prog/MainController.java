@@ -25,6 +25,8 @@ import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,6 +110,12 @@ public class MainController {
 		return new ModelAndView("loginRecord", "loginRecords", lrList);
 	}
 	
+	@RequestMapping("/superadmin/actionRecord")
+	public ModelAndView actionRecordList() {		
+		List <Record> lrList = actions.getActionRecordListLim(10);
+		return new ModelAndView("record", "actionRecords", lrList);
+	}
+	
 	@RequestMapping("/superadmin/showLogins")
 	public ModelAndView showLogins(
 			@RequestParam(value="pattern", required=false) int pattern
@@ -116,6 +124,16 @@ public class MainController {
 			return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(10));
 		}
 		return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(pattern));
+	}
+	
+	@RequestMapping("/superadmin/showActions")
+	public ModelAndView showActions(
+			@RequestParam(value="pattern", required=false) int pattern
+			) {
+		if(pattern == 0){
+			return new ModelAndView("record", "actionRecords", actions.getActionRecordListLim(10));
+		}
+		return new ModelAndView("record", "actionRecords", actions.getActionRecordListLim(pattern));
 	}
 	
 	@RequestMapping("/superadmin/deleteLoginHistory")
@@ -127,6 +145,15 @@ public class MainController {
 		return new ModelAndView("loginRecord", "loginRecords", actions.getLoginRecordListLim(10));
 	}
 	
+	@RequestMapping("/superadmin/deleteActionHistory")
+	public ModelAndView deleteActionHistory() {
+		List <Record> lrList = actions.getActionRecordListLim(100000);
+		for(int i=0; i<lrList.size(); i++){
+			actions.deleteActionHistory(lrList.get(i));
+		}
+		return new ModelAndView("record", "actionRecords", actions.getActionRecordListLim(10));
+	}
+	
 	@RequestMapping("/admin/deleteDocuments")
 	public ModelAndView deleteDocuments(
 			@RequestParam(value="id []", required=false) String [] id
@@ -135,6 +162,19 @@ public class MainController {
 		if(id == null){
 			return new ModelAndView("errorPage", "note", "Вы не выбрали ни одного документа для удаления!");
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	      for(String s: id){
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName((actions.getDocByInvNym(s)).getName());
+	    	  record.setActionName("deleted document");
+	    	  actions.save(record);
+	      }
+		
 			actions.deleteDocByInvNum(id);
 			List <BigSection> bsList = actions.BigSectionList(); 
 			return new ModelAndView("main", "bs", bsList);	
@@ -385,15 +425,10 @@ public class MainController {
 	
 	@RequestMapping(value = "/admin/ChooseSmallSection", method = RequestMethod.POST)
 	public ModelAndView chooseSmallSection(
-			@RequestParam(value="SelectBigSection") String name
+			@RequestParam(value="SelectBigSection", required = false) String name
 			) {
-		if(actions.smallSectionList(name).size() == 0){
-			List <Section> sList = new ArrayList<>();
-			Section s = new Section();
-			s.setId("");
-			s.setName("");
-			sList.add(s);
-			return new ModelAndView("choosesmallsection", "Sections", sList);
+		if(name == null){
+			return new ModelAndView("errorPage", "note", "В данный момент разделов не обнаружено, создайте сначала раздел!");
 		}
 		List <Object> all = new ArrayList<>();
 		all.add(actions.smallSectionList(name));
@@ -451,6 +486,17 @@ public class MainController {
 		bs.setName(name);
 		bs.setId(id);
 		actions.add(bs);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(name);
+	    	  record.setActionName("created big section");
+	    	  actions.save(record);
 		List <BigSection> list2 = actions.BigSectionList();
 		
 		return new ModelAndView("choosebigsection", "bigSections", list2);	
@@ -489,7 +535,18 @@ public class MainController {
 		s.setName(name);
 		s.setId(bs.getId()+"."+id);
 		s.setBigSection(bs);
-		actions.add(bs);	
+		actions.add(bs);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(name);
+	    	  record.setActionName("created small section under: "+bs.getName());
+	    	  actions.save(record);
 		return new ModelAndView("choosebigsection", "bigSections", actions.BigSectionList());	
 	}
 
@@ -533,6 +590,7 @@ public class MainController {
 		all.add(s);
 		all.add(i);
 		all.add(rList);
+		all.add(bigSectionName);
 				return new ModelAndView ("add_page", "all", all);
 	}
 	
@@ -562,16 +620,27 @@ public class MainController {
 	{	
 		String invName = request.getParameter("in");
 		Document d = actions.getDocByInvNym(invName);
+		String fileNameOld = d.getFileName();
 		d.setFileBody(null);
 		d.setFileName(null);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(d.getName());
+	    	  record.setActionName("deleted file in document");
+	    	  record.setOldValue(fileNameOld);
+	    	  record.setNewValue(null);
+	    	  actions.save(record);
 		List <Receiver> rList = actions.ReceiverList();
 		List <Publisher> pList = actions.PublisherList();
 		List <Object> all = new ArrayList<>();
 		all.add(pList);
 		all.add(d);
 		all.add(rList);
-		
-		
 		return new ModelAndView ("edit_page", "all", all);
 	}
 	
@@ -611,6 +680,18 @@ public class MainController {
 			e.printStackTrace();
 		}
 		actions.add(d);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(file.getOriginalFilename());
+	    	  record.setActionName("uploaded file in document: "+d.getName());
+	    	  actions.save(record);
+		
 		List <BigSection> bsList = actions.BigSectionList(); 
 		return new ModelAndView("main", "bs", bsList);
 	}
@@ -623,7 +704,7 @@ public class MainController {
 	@RequestMapping(value = "/admin/createDocument", method = RequestMethod.POST)
 	public ModelAndView addDoc(
 				
-				
+			@RequestParam(value="bigSectionName") String bigSectionName,
 						@RequestParam(value="sectionName") String sectionName,
 						 @RequestParam(value="numberInSection") String inventaryNumber,
 						 @RequestParam(value="name") String name,
@@ -645,7 +726,13 @@ public class MainController {
 			
 			
 			Document doc = new Document();
-			Section s = actions.getSectionByName(sectionName);
+			BigSection bigSection = actions.getBigSectionByName(bigSectionName);
+			List <Section> sections = bigSection.getSections();
+			Section s = null;
+			for(Section s1: sections){
+				if(s1.getName().equals(bigSectionName));
+				s=s1;
+			}
 			List <Document> dList = s.getDocuments();
 			if("".equals(inventaryNumber)){
 				
@@ -662,6 +749,9 @@ public class MainController {
 			for(Document d: dList){
 				if((s.getId()+"."+inventaryNumber).equals(d.getInventaryNumber())){
 					return new ModelAndView("errorPage", "note", "Указанный Вами номер документа уже существует!");
+				}
+				if(d.getName().equals(name)){
+					return new ModelAndView("errorPage", "note", "Указанное Вами имя документа в данной секции уже существует!");
 				}
 			}
 			doc.setSection(s);
@@ -695,6 +785,18 @@ public class MainController {
 			
 					
 			actions.add(doc);
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		      String userName = auth.getName();
+		      User user = actions.getUserByUserName(userName);
+		    	  Record record = new Record();
+		    	  record.setUserName(userName);
+		    	  record.setUserId(String.valueOf(user.getId()));
+		    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+		    	  record.setDocumentName(doc.getName());
+		    	  record.setActionName("created new document under section: \""+doc.getSection().getName()+"\"");
+		    	  actions.save(record);
+			
 			List <BigSection> bsList = actions.BigSectionList(); 
 			return new ModelAndView("main", "bs", bsList);
 		} catch (IOException ex) {
@@ -718,6 +820,16 @@ public class MainController {
 		Publisher p = new Publisher();
 		p.setName(nameOfPublisher);
 		actions.add(p);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(nameOfPublisher);
+	    	  record.setActionName("created new publisher");
+	    	  actions.save(record);
 		List <BigSection> list = actions.BigSectionList();
 		
 		return new ModelAndView("choosebigsection", "bigSections", list);	
@@ -736,6 +848,16 @@ public class MainController {
 		Publisher p = new Publisher();
 		p.setName(nameOfPublisher);
 		actions.add(p);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(nameOfPublisher);
+	    	  record.setActionName("created new publisher");
+	    	  actions.save(record);
 		List <BigSection> list = actions.BigSectionList();
 		return new ModelAndView("main", "bs", list);
 	}
@@ -753,6 +875,16 @@ public class MainController {
 		Receiver r = new Receiver();
 		r.setName(nameOfReceiver);
 		actions.add(r);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(nameOfReceiver);
+	    	  record.setActionName("created new receiver");
+	    	  actions.save(record);
 		List <BigSection> list = actions.BigSectionList();
 		return new ModelAndView("main", "bs", list);
 	}
@@ -788,9 +920,32 @@ public class MainController {
 						 HttpServletRequest request,
 						 HttpServletResponse response)
 	{
-		
+		String sectionNumber = inventaryNumber.substring(0, inventaryNumber.lastIndexOf('.'));
+		Section s = actions.getSectionByID(sectionNumber);
 		Document doc = actions.getDocByInvNym(inventaryNumber);
+		for(Document d: s.getDocuments()){
+if(d.getName().equals(name)){
+	if(d.getName().equals(doc.getName()))
+		continue;
+	return new ModelAndView("errorPage", "note", "Указанное Вами имя документа в данной секции уже существует!");
+}
+		}
+		String nameOld = doc.getName();
+		String pNameOld = null;
+		if(doc.getPublisher()!=null)
+			pNameOld = doc.getPublisher().getName();
 		//doc.setPublishDate(publishDate);
+		String pDateOld = doc.getPublishDate();
+		String receiverNameOld = null;
+		if(doc.getReceiver()!=null){
+			receiverNameOld = doc.getReceiver().getName();
+		}
+		String noteOld = doc.getNote();
+		String docTypeOld = doc.getDocType();
+		int quantOld = doc.getQuantity();
+		ArrayList <String> recordListOld = new ArrayList<>();
+		ArrayList <String> recordListNew = new ArrayList<>();
+		
 		doc.setName(name);
 		Receiver rOld = doc.getReceiver();
 		if(rOld!=null){
@@ -833,6 +988,60 @@ public class MainController {
 		doc.setPublishDate(publishDate);
 		
 		actions.add(doc);
+		if(!nameOld.equals(doc.getName())){
+			recordListOld.add(" name: " +nameOld);
+			recordListNew.add(" name: "+doc.getName());
+		}
+		if(!(doc.getPublisher().getName()).equals(pNameOld)){
+			recordListOld.add(" publisher: "+pNameOld);
+			recordListNew.add(" publisher: "+doc.getPublisher().getName());
+		}
+		if(!doc.getPublishDate().equals(pDateOld)){
+			recordListOld.add(" publish date: "+pDateOld);
+			recordListNew.add(" publish date: "+doc.getPublishDate());
+		}
+		if(!doc.getReceiver().getName().equals(receiverNameOld)){
+			recordListOld.add(" receiver: "+receiverNameOld);
+			recordListNew.add(" receiver: "+doc.getReceiver().getName());
+		}
+		if(doc.getNote()!=null){
+		if(!doc.getNote().equals(noteOld)){
+			recordListOld.add(" note: "+noteOld);
+			recordListNew.add(" note: "+doc.getNote());
+		}
+		}
+		if(!doc.getDocType().equals(docTypeOld)){
+			recordListOld.add(" doc. type: "+docTypeOld);
+			recordListNew.add(" doc. type: "+doc.getDocType());
+		}
+		if(doc.getQuantity() != (quantOld)){
+			recordListOld.add(" quantity: "+String.valueOf(quantOld));
+			recordListNew.add(" quantity: "+String.valueOf(doc.getQuantity()));
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(doc.getName());
+	    	  record.setActionName("edited document");
+	    	  for(String recOld: recordListOld){
+	    		  if(record.getOldValue()==null){
+	    			  record.setOldValue("");
+	    		  }
+	    		  record.setOldValue(record.getOldValue()+recOld);
+	    	  }
+	    	  for(String recNew: recordListNew){
+	    		  if(record.getNewValue()==null){
+	    			  record.setNewValue("");
+	    		  }
+	    		  record.setNewValue(record.getNewValue()+recNew);
+	    	  }
+	    	  
+	    	  actions.save(record);
 		
 		List <BigSection> bsList = actions.BigSectionList(); 
 		return new ModelAndView("main", "bs", bsList);
@@ -851,9 +1060,33 @@ public class MainController {
 						 HttpServletRequest request,
 						 HttpServletResponse response)
 	{
-		
+		String sectionNumber = inventaryNumber.substring(0, inventaryNumber.lastIndexOf('.'));
+		Section s = actions.getSectionByID(sectionNumber);
 		Document doc = actions.getDocByInvNym(inventaryNumber);
+		for(Document d: s.getDocuments()){
+if(d.getName().equals(name)){
+	if(d.getName().equals(doc.getName()))
+		continue;
+	return new ModelAndView("errorPage", "note", "Указанное Вами имя документа в данной секции уже существует!");
+}
+		}
+		
 		//doc.setPublishDate(publishDate);
+		String nameOld = doc.getName();
+		String pNameOld = null;
+		if(doc.getPublisher()!=null)
+			pNameOld = doc.getPublisher().getName();
+		//doc.setPublishDate(publishDate);
+		String pDateOld = doc.getPublishDate();
+		String receiverNameOld = null;
+		if(doc.getReceiver()!=null){
+			receiverNameOld = doc.getReceiver().getName();
+		}
+		String noteOld = doc.getNote();
+		String docTypeOld = doc.getDocType();
+		int quantOld = doc.getQuantity();
+		ArrayList <String> recordListOld = new ArrayList<>();
+		ArrayList <String> recordListNew = new ArrayList<>();
 		doc.setName(name);
 		
 		Receiver rOld = doc.getReceiver();
@@ -881,6 +1114,55 @@ public class MainController {
 		doc.setPublishDate(publishDate);
 		
 		actions.add(doc);
+		
+		if(!nameOld.equals(doc.getName())){
+			recordListOld.add(" name: " +nameOld);
+			recordListNew.add(" name: "+doc.getName());
+		}
+		if(!(doc.getPublisher().getName()).equals(pNameOld)){
+			recordListOld.add(" publisher: "+pNameOld);
+			recordListNew.add(" publisher: "+doc.getPublisher().getName());
+		}
+		if(!doc.getPublishDate().equals(pDateOld)){
+			recordListOld.add(" publish date: "+pDateOld);
+			recordListNew.add(" publish date: "+doc.getPublishDate());
+		}
+		if(!doc.getReceiver().getName().equals(receiverNameOld)){
+			recordListOld.add(" receiver: "+receiverNameOld);
+			recordListNew.add(" receiver: "+doc.getReceiver().getName());
+		}
+		if(doc.getNote()!=null){
+		if(!doc.getNote().equals(noteOld)){
+			recordListOld.add(" note: "+noteOld);
+			recordListNew.add(" note: "+doc.getNote());
+		}
+		}
+		if(!doc.getDocType().equals(docTypeOld)){
+			recordListOld.add(" doc. type: "+docTypeOld);
+			recordListNew.add(" doc. type: "+doc.getDocType());
+		}
+		if(doc.getQuantity() == (quantOld)){
+			recordListOld.add(" quantity: "+String.valueOf(quantOld));
+			recordListNew.add(" quantity: "+String.valueOf(doc.getQuantity()));
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+	    	  Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(doc.getName());
+	    	  record.setActionName("edited document");
+	    	  for(String recOld: recordListOld){
+	    		  record.setOldValue(record.getOldValue()+recOld);
+	    	  }
+	    	  for(String recNew: recordListNew){
+	    		  record.setNewValue(record.getNewValue()+recNew);
+	    	  }
+	    	  
+	    	  actions.save(record);
 		
 		List <BigSection> bsList = actions.BigSectionList(); 
 		return new ModelAndView("main", "bs", bsList);
@@ -924,6 +1206,16 @@ public class MainController {
 		if(bs.getSections().isEmpty()){
 			
 			actions.deleteBigSection(bs);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		      String userName = auth.getName();
+		      User user = actions.getUserByUserName(userName);
+		    	  Record record = new Record();
+		    	  record.setUserName(userName);
+		    	  record.setUserId(String.valueOf(user.getId()));
+		    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+		    	  record.setDocumentName(bs.getName());
+		    	  record.setActionName("deleted big section");
+		    	  actions.save(record);
 			
 			return new ModelAndView("main", "bs", actions.BigSectionList());
 		}
@@ -957,6 +1249,16 @@ public class MainController {
 		if(s.getDocuments().isEmpty()){
 			
 			actions.deleteSection(s);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		      String userName = auth.getName();
+		      User user = actions.getUserByUserName(userName);
+		    	  Record record = new Record();
+		    	  record.setUserName(userName);
+		    	  record.setUserId(String.valueOf(user.getId()));
+		    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+		    	  record.setDocumentName(s.getName());
+		    	  record.setActionName("deleted small section");
+		    	  actions.save(record);
 			
 			return new ModelAndView("main", "bs", actions.BigSectionList());
 		}
@@ -1078,6 +1380,16 @@ public class MainController {
 		}
 		
 		actions.deletePublisher(p);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+		 Record record = new Record();
+   	  record.setUserName(userName);
+   	  record.setUserId(String.valueOf(user.getId()));
+   	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+   	  record.setDocumentName(p.getName());
+   	  record.setActionName("deleted publisher");
+   	  actions.save(record);
 		List <Publisher> pList = actions.PublisherList();
 		all.add(pList);
 		all.add(note);
@@ -1104,6 +1416,16 @@ public class MainController {
 		}
 		
 		actions.deleteReceiver(r);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = actions.getUserByUserName(userName);
+		 Record record = new Record();
+ 	  record.setUserName(userName);
+ 	  record.setUserId(String.valueOf(user.getId()));
+ 	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+ 	  record.setDocumentName(r.getName());
+ 	  record.setActionName("deleted receiver");
+ 	  actions.save(record);
 		List <Receiver> rList = actions.ReceiverList();
 		all.add(rList);
 		all.add(note);
@@ -1164,6 +1486,16 @@ public class MainController {
 			user.getGroup().getUsers().remove(user);
 		}
 		actions.deleteUser(user);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user1 = actions.getUserByUserName(userName);
+		 Record record = new Record();
+ 	  record.setUserName(userName);
+ 	  record.setUserId(String.valueOf(user.getId()));
+ 	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+ 	  record.setDocumentName(user1.getUsername());
+ 	  record.setActionName("deleted user");
+ 	  actions.save(record);
 		List <User> allUsers = actions.getAllUsers();
 		for(int i=0; i<allUsers.size(); i++){
 			if(allUsers.get(i).getUsername().equals("superadmin")){
@@ -1263,6 +1595,16 @@ public class MainController {
                                 		bs.setId(invNum);	
                                 		 bs.setName(bsName);
                                 		 actions.add(bs);
+                                		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                                  	      String userName = auth.getName();
+                                  	      User user = actions.getUserByUserName(userName);
+                                  		 Record record = new Record();
+                                   	  record.setUserName(userName);
+                                   	  record.setUserId(String.valueOf(user.getId()));
+                                   	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+                                   	  record.setDocumentName(bs.getName());
+                                   	  record.setActionName("created new big section from excel");
+                                   	  actions.save(record);
                                 	 
                                 	 break;	 
                                  }
@@ -1292,6 +1634,16 @@ public class MainController {
                                 		 s.setBigSection(bs);
                                 	 }
                                 	 actions.add(bs);
+                                	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                             	      String userName = auth.getName();
+                             	      User user = actions.getUserByUserName(userName);
+                             		 Record record = new Record();
+                              	  record.setUserName(userName);
+                              	  record.setUserId(String.valueOf(user.getId()));
+                              	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+                              	  record.setDocumentName(s.getName());
+                              	  record.setActionName("created new small section from excel");
+                              	  actions.save(record);
                                  }
                                 if(aaa.length==3 && divVal.length == 1 && cell.getColumnIndex() == 0){
                                 		 d = new Document();
@@ -1389,13 +1741,23 @@ public class MainController {
                                 	 if(cell.getColumnIndex() == 7){
                                 		 if(d!=null && value!=null){
                                 		 int quant = 0;
-                                		 {
+                                		 
                                 			 if(!value.contains("-")){
                                 		 quant = Integer.parseInt(aaa[0]);
                                 			 }
                                 		 d.setQuantity(quant);
                                 		 actions.add(d);
-                                		 }
+                                		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                               	      String userName = auth.getName();
+                               	      User user = actions.getUserByUserName(userName);
+                               		 Record record = new Record();
+                                	  record.setUserName(userName);
+                                	  record.setUserId(String.valueOf(user.getId()));
+                                	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+                                	  record.setDocumentName(d.getName());
+                                	  record.setActionName("created new document from excel");
+                                	  actions.save(record);
+                                		 
                                 		 }
                                 	 } 
                                  } 

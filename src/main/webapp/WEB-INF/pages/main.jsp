@@ -121,9 +121,7 @@
 div#formline*{
 display: inline-block;
 }
-.but{ 
-	width: 108%;
-}
+
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -152,6 +150,9 @@ display: inline-block;
     </form>
      <form action="/superadmin/loginRecord" method="post">
      <button title="log in history" type="submit" class="search"><img class="but" src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/key-24.png"></button>
+    </form>
+    <form action="/superadmin/actionRecord" method="post">
+     <button title="action history" type="submit" class="search"><img src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_history_48px-24.png"></button>
     </form>
     
     </sec:authorize>

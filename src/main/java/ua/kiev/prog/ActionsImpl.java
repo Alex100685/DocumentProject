@@ -11,6 +11,8 @@ import org.apache.poi.xwpf.converter.xhtml.XHTMLConverter;
 import org.apache.poi.xwpf.converter.xhtml.XHTMLOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ActionsImpl implements Actions {
@@ -293,8 +297,11 @@ public class ActionsImpl implements Actions {
 
 	@Override
 	public void deleteBigSectionWithSections(BigSection bs) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = this.getUserByUserName(userName);
 		List <Section> sList = bs.getSections();
-		entityManager.getTransaction().begin();
+		
 		int iteration = sList.size();
 		for(int i=0; i<iteration; i++){
 			List <Document> dList = sList.get(0).getDocuments();
@@ -313,15 +320,42 @@ public class ActionsImpl implements Actions {
 					}
 				}
 				dList.remove(dList.get(0));
+				entityManager.getTransaction().begin();
 				entityManager.remove(dtemp);
+				entityManager.getTransaction().commit();
+			    	  Record record = new Record();
+			    	  record.setUserName(userName);
+			    	  record.setUserId(String.valueOf(user.getId()));
+			    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+			    	  record.setDocumentName(dtemp.getName());
+			    	  record.setActionName("deleted document");
+			    	  this.save(record);
 			}
 			}
 			Section stemp = sList.get(0);
 			sList.remove(sList.get(0));
-			entityManager.remove(stemp);	
-		}	
+			entityManager.getTransaction().begin();
+			entityManager.remove(stemp);
+			entityManager.getTransaction().commit();
+		     
+		    	  Record record = new Record();
+		    	  record.setUserName(userName);
+		    	  record.setUserId(String.valueOf(user.getId()));
+		    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+		    	  record.setDocumentName(stemp.getName());
+		    	  record.setActionName("deleted small section");
+		    	  this.save(record);
+		}
+		entityManager.getTransaction().begin();
 		entityManager.remove(bs);
 		entityManager.getTransaction().commit();
+		Record record = new Record();
+  	  record.setUserName(userName);
+  	  record.setUserId(String.valueOf(user.getId()));
+  	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+  	  record.setDocumentName(bs.getName());
+  	  record.setActionName("deleted big section");
+  	  this.save(record);
 		
 	}
 
@@ -342,8 +376,11 @@ public class ActionsImpl implements Actions {
 
 	@Override
 	public void deleteSectionWithDocuments(Section s) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = auth.getName();
+	      User user = this.getUserByUserName(userName);
 		List <Document> dList = s.getDocuments();
-		entityManager.getTransaction().begin();
+		
 		s.getBigSection().getSections().remove(s);
 		int iteration = dList.size();
 		for(int i=0; i<iteration; i++){
@@ -361,10 +398,29 @@ public class ActionsImpl implements Actions {
 			}
 			
 			dList.remove(dList.get(0));
+			entityManager.getTransaction().begin();
 			entityManager.remove(dtemp);
+			entityManager.getTransaction().commit();
+			 Record record = new Record();
+	    	  record.setUserName(userName);
+	    	  record.setUserId(String.valueOf(user.getId()));
+	    	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+	    	  record.setDocumentName(dtemp.getName());
+	    	  record.setActionName("deleted document");
+	    	  this.save(record);
+			
 		}
+		entityManager.getTransaction().begin();
 		entityManager.remove(s);
 		entityManager.getTransaction().commit();
+		 Record record = new Record();
+   	  record.setUserName(userName);
+   	  record.setUserId(String.valueOf(user.getId()));
+   	  record.setDate(new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z").format(new Date()));
+   	  record.setDocumentName(s.getName());
+   	  record.setActionName("deleted small section");
+   	  this.save(record);
+		
 	}
 	
 	@Override
@@ -593,5 +649,43 @@ public class ActionsImpl implements Actions {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Record> getActionRecordListLim(int limit) {
+		try{
+			List <Record> list = new ArrayList<>();
+			Query query = entityManager.createQuery("SELECT r FROM Record r order by r.id desc", Record.class);
+			list = query.setMaxResults(limit).getResultList();
+			return list;
+		} catch(NoResultException e) {
+	        return null;
+	    }
+	}
+
+	@Override
+	public void deleteActionHistory(Record record) {
+		try{
+			entityManager.getTransaction().begin();
+			entityManager.remove(record);
+			entityManager.getTransaction().commit();
+			}catch(Exception e){
+				entityManager.getTransaction().rollback();
+				e.printStackTrace();
+			}
+		
+	}
+
+	@Override
+	public void save(Record record) {
+		try{
+			 entityManager.getTransaction().begin();
+	         entityManager.persist(record);
+	         entityManager.getTransaction().commit();
+			} catch (Exception ex) {
+	            entityManager.getTransaction().rollback();
+	            ex.printStackTrace();
+	        }
+		
 	}
 }

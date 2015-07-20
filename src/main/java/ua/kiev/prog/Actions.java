@@ -55,6 +55,9 @@ public interface Actions {
 	public void deleteFont(Fonts f);
 	public List<LoginRecord> getLoginRecordListLim(int limit);
 	public void deleteLoginHistory(LoginRecord lr);
+	public List<Record> getActionRecordListLim(int limit);
+	public void deleteActionHistory(Record record);
+	public void save(Record record);
 	
 
 }

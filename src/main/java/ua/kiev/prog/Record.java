@@ -24,7 +24,7 @@ public class Record {
     private String date;
 	
 	@Column(name="user_name", nullable = false)
-    private String name;
+    private String userName;
 	
 	@Column(name="user_id", nullable = false)
     private String userId;
@@ -42,6 +42,16 @@ public class Record {
     private String newValue;
 
 
+	public String getDate() {
+		return date;
+	}
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -52,13 +62,13 @@ public class Record {
 	}
 
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 

@@ -147,6 +147,9 @@ display: inline-block;
     <form action="/superadmin/loginRecord" method="post">
      <button title="log in history" type="submit" class="search"><img src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/key-24.png"></button>
     </form>
+    <form action="/superadmin/actionRecord" method="post">
+     <button title="action history" type="submit" class="search"><img src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_history_48px-24.png"></button>
+    </form>
     </sec:authorize>
 </div>
     

@@ -72,6 +72,9 @@ select{
 .container .required{
     color:red;
 }
+.hidden {
+    display: none;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>New Document</title>
@@ -102,6 +105,7 @@ select{
 		<div class="form-group"> 
   
   <input type="text" class="form-control" name="publishDate" style="width: 429px; height: 34px">
+  <input type="text" class="hidden" name="bigSectionName" value="${all[4]}" style="width: 429px; height: 34px">
 </div> 
 		
 		
