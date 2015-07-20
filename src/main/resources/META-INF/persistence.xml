@@ -8,13 +8,13 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             
-         <!--  	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.10.247.130:3306/docservice"/>
+          	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.10.247.130:3306/docservice"/>
             <property name="javax.persistence.jdbc.user" value="adminriLNIdl" />
-            <property name="javax.persistence.jdbc.password" value="HJab8-r9MxMa" /> --> 
+            <property name="javax.persistence.jdbc.password" value="HJab8-r9MxMa" />
             
-           	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mazur"/>
+          <!--  	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mazur"/>
             <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="root" /> 
+            <property name="javax.persistence.jdbc.password" value="root" />  --> 
             
             
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
