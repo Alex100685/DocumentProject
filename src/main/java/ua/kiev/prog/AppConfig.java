@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -23,6 +24,7 @@ import javax.persistence.Persistence;
 @EnableWebMvc
 //@EnableScheduling
 @ImportResource("WEB-INF/spring-security.xml")
+@EnableAspectJAutoProxy
 public class AppConfig {
 	
 	@Bean
@@ -56,5 +58,10 @@ public class AppConfig {
         return new CommonsMultipartResolver();
     }
     
+    @Bean
+    public AutoconnectionAspect autoconnectionAspect() {
+        return new AutoconnectionAspect();
+    }
+
     
 }

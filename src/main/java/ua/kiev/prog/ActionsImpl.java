@@ -25,6 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,10 +34,11 @@ import java.util.List;
 
 public class ActionsImpl implements Actions {
 	
+	
+	
+	
 	@Autowired
     private EntityManager entityManager;
-	
-	
 	
 
 	public List<Document> DocumentList() {
@@ -60,6 +63,7 @@ public class ActionsImpl implements Actions {
     }
 	}
 
+	
 	@Override
 	public void add(BigSection bs) {
 		try {
@@ -286,12 +290,14 @@ public class ActionsImpl implements Actions {
         return null;
     }
 	}
-
+	
+	
 	@Override
 	public void deleteBigSection(BigSection bs) {
-		entityManager.getTransaction().begin();
+	//	entityManager.getTransaction().begin();
 		entityManager.remove(bs);
-		entityManager.getTransaction().commit();
+		System.out.println("Section deleted!");
+	//	entityManager.getTransaction().commit();
 		
 	}
 
@@ -688,4 +694,5 @@ public class ActionsImpl implements Actions {
 	        }
 		
 	}
+
 }

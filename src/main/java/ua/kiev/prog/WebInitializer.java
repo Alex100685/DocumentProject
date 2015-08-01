@@ -1,11 +1,15 @@
 package ua.kiev.prog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+
+
 
 
 
@@ -32,6 +36,7 @@ public class WebInitializer implements WebApplicationInitializer{
         servletContext.addListener(new ContextLoaderListener(ctx));
         
         ctx.addApplicationListener(new AuthenticationListener());
+        
 
       ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
       servlet.addMapping("/");
